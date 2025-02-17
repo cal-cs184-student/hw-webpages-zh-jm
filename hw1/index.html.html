@@ -1,0 +1,836 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>CS 284A HW1 Report</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="19cfcf3e-9c17-80ee-8424-e70361cb4b4c" class="page sans"><header><h1 class="page-title">CS 284A HW1 Report</h1><p class="page-description"></p></header><div class="page-body"><p id="19cfcf3e-9c17-8065-984e-e898e31adbd8" class="">Zihan Liao, Junming Chen</p><p id="19cfcf3e-9c17-8027-8af2-eb279965835b" class="">Webpage: <a href="https://cal-cs184-student.github.io/hw-webpages-zh-jm/">https://cal-cs184-student.github.io/hw-webpages-zh-jm/</a></p><p id="19dfcf3e-9c17-8008-ba82-faef0ecd1f23" class="">GitHub: <a href="https://github.com/cal-cs184-student/sp25-hw1-zihan-junming">https://github.com/cal-cs184-student/sp25-hw1-zihan-junming</a></p><h1 id="19cfcf3e-9c17-8002-aa56-c9854fec23a9" class="">Task1: <strong>Drawing Single-Color Triangles</strong></h1><p id="e25ee341-e03c-486f-b9cb-0684cf479456" class="">For this basic task, we rasterize triangle to the pixel center within the <code>rasterize_triangle</code> function in <code>rasterizer.cpp</code> . First of all, we search for the bounding box for each triangles and then loop over the pixel inside this area to determine whether they need to be filled in colors. Noted that for each pixel, it’s represented by it’s centered coordinates. Besides these basic requirement, we also implemented a binary search method to efficiently searching for the triangles’ boundry.</p><h3 id="7ee612d9-9ce7-4ca2-802d-a2e5d37da316" class="">1.1 Binary Search Optimization in Triangle Rasterization</h3><p id="4ba76d5f-0866-4ed2-9b95-958812dde35c" class="">We implemented a optimized traingle rasterization algorithm by utilizing a binary search for efficient scanline traversal. When processing a given scanline, rather than iterating through each pixel, our algorithm <strong>binary search</strong> to quickly locate the first valid pixel inside the triangle. This is particularly useful when the bounding box of the triangle is large, ensuring that unnecessary computations are skipped efficiently. In practice, we set it valid when the length(scaled by supersample rate) of bounding box’s edge is larger than 1024.</p><p id="140d7c71-9c61-4177-bb49-9eed6a1cb41e" class=""><strong>1.1.1 Bounding Box Calculation:</strong> The smallest rectangle enclosing the triangle is computed using:<div class="indented"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1315ae36-cf9a-4e26-9651-7ad2d68fabfb" class="code"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">  void RasterizerImp::rasterize_triangle(float x0, float y0,
+      float x1, float y1,
+      float x2, float y2,
+      Color color) {
+
+      int sqrt_rate = (int)std::sqrt(sample_rate);
+      float center = 0.5f / sqrt_rate;
+      float interval = 1.0f / sqrt_rate;
+
+      int xidx0 = (int)((x0 - center) / interval);
+      ...
+      int yidx2 = (int)((y2 - center) / interval);
+
+      size_t minX = std::min({ xidx0, xidx1, xidx2 });
+      ...
+      size_t maxY = std::max({ yidx0, yidx1, yidx2 });</code></pre></div></p><p id="15f3f5f8-bea2-4a84-80c0-4ddbdd280e02" class=""><strong>1.1.2 Function for point-in-triangle:</strong> The <code>edge_function</code> is used to check whether a pixel is inside the triangle. It calculated the side of a point relative to the given triangle’s edges:<div class="indented"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="9f8a5473-979a-42ac-ab84-7653195fd433" class="code"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">auto edge_function = [](float x0, float y0, float x1, float y1, float x2, float y2) {
+    return (x1 - x0) * (y2 - y0) - (x2 - x0) * (y1 - y0);
+};
+
+...
+...
+
+for (int i = i_min; i &lt;= maxX; i++) {
+    float sample_x = i * interval + center;
+    float sample_y = j * interval + center;
+
+    float w0 = edge_function(x1, y1, x2, y2, sample_x, sample_y) / area;
+    float w1 = edge_function(x2, y2, x0, y0, sample_x, sample_y) / area;
+    float w2 = 1 - w0 - w1;
+
+    if (w0 &lt; 0 || w1 &lt; 0 || w2 &lt; 0) continue;
+    size_t index = (j * width * sqrt_rate + i);
+    sample_buffer[index] = color;
+
+}</code></pre></div></p><p id="8ffc28ba-0951-40fc-bfc5-523ebd800656" class=""><strong>1.1.3 Binary Search for Efficient Scanline Entry:</strong><div class="indented"><ul id="ca08148f-f975-4f0c-a5bc-5afe6730c78b" class="bulleted-list"><li style="list-style-type:disc">If the scanline width exceeds a predefined threshold (<code>TURNON_BINARY_SEARCH_THRESHOLD</code>), binary search is performed to locate the first valid pixel:</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="66d652b3-4c60-4e5c-a795-82554dc52f18" class="code"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">if (maxX - minX &gt; TURNON_BINARY_SEARCH_THRESHOLD) {
+    int left = minX, right = maxX;
+    float init_w0 = edge_function(x1, y1, x2, y2, minX * interval + center, sample_y) / area;
+    if (init_w0 &lt; 0) {
+        while (left &lt; right) {
+            int mid = (left + right) / 2;
+            float mid_x = mid * interval + center;
+            float mid_w0 = edge_function(x1, y1, x2, y2, mid_x, sample_y) / area;
+            if (mid_w0 &gt;= 0) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+        i_min = std::max(left, i_min);
+    }
+}
+</code></pre></div></p><p id="8f2324ec-a74c-4db1-bba9-0a8979df0135" class=""><strong>1.1.4 Barycentric Precompute and Updates:</strong> Once the first valid pixel is found, we will compute it’s initial barycentric coordinates needed for the <strong>point-in-triangle </strong>test. After that, the barycentric coordinates are updated by incrementally add along the scanline:<div class="indented"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="d6a946e2-e628-44dc-be2d-313fb214211d" class="code"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">float dw0di = -interval * (y2 - y1) / area;
+float dw1di = -interval * (y0 - y2) / area;
+float dw2di = -dw0di - dw1di;</code></pre></div></p><h3 id="1ebf97a7-acef-4056-8ca7-766dd2de0406" class="">1.2 Extra Credit: Optimizations and Timing Comparison</h3><p id="0773ddba-e66c-4405-a141-5e4f9d1bfe2e" class="">To improve performance, additional optimizations were applied:</p><ol type="1" id="372f8947-b6c6-49a2-8c69-3fb40b04d8f4" class="numbered-list" start="1"><li><strong>Binary Search for Start Position:</strong><ul id="4c7d5ecf-1a8f-4f40-8d7e-04b2e7113f68" class="bulleted-list"><li style="list-style-type:disc">Instead of checking every pixel, binary search is used to find the first pixel on a scanline that belongs to the triangle, significantly reducing checks in large bounding boxes.</li></ul></li></ol><ol type="1" id="68dc564f-45f0-46a6-b52e-bcf061860a52" class="numbered-list" start="2"><li><strong>Incremental Barycentric Coordinate Updates:</strong><ul id="9799e83e-b3a4-400b-8549-8f8f052a54d2" class="bulleted-list"><li style="list-style-type:disc">Instead of computing barycentric coordinates from scratch for every pixel, the implementation updates them incrementally, reducing redundant calculations.</li></ul></li></ol><p id="19cfcf3e-9c17-8022-8ff8-e41538069608" class="">Using <code>std::chrono::high_resolution_clock</code> in <code>DrawRend::redraw()</code> , we calculated this time table below, based on test4 case without supersample. Here we can see ourBinary Search + Incremental Updates always have 2x speed up on most of the case.</p><figure id="19cfcf3e-9c17-80aa-b1ce-f8e873431d93" class="image"><a href="image.png"><img style="width:144px" src="image.png"/></a></figure><h3 id="1e447dcb-78ed-4d92-8f12-eafad81a5cad" class="">1.3 Results and Screenshot</h3><p id="1b64e81e-1ba8-4bd2-a725-fa699424967b" class="">Below is a screenshot of <code>basic/test4.svg</code> with the default viewing parameters and the pixel inspector centered on an interesting part of the scene.</p><figure id="19dfcf3e-9c17-8099-924e-ca9ad74bd11e" class="image"><a href="screenshot_2-16_16-25-10.png"><img style="width:710px" src="screenshot_2-16_16-25-10.png"/></a><figcaption><em><strong>test4.svg, without supersampling</strong></em></figcaption></figure><h1 id="19cfcf3e-9c17-803a-9fab-cb7f62c74ccb" class="">Task2: <strong>Antialiasing by Supersampling</strong></h1><p id="88f8fc09-7e75-4ddf-a0da-6701293c8e75" class="">For supersampling, we divide each pixel into multiple sub-pixels and averaging their color values to produce smoother edges. The<code>sample_rate</code> refer to the scale of area for supersampling, which is always the square number.</p><h3 id="adbafa34-f4b4-4a03-bac1-6260dd1fa5d1" class="">2.1 Supersampling Implementation</h3><p id="1ae76df6-f66d-457d-9dfc-07cdd50d7fdd" class="">In supersampling, we will build up a scaled array <code>sample_buffer</code> to store the sub-pixel’s colors at a higher resolution than the original input resolution. After accumulating multiple samples, we will downsample the buffer and write the pixel value to the final <code>rgb_framebuffer_target</code> .</p><p id="19dfcf3e-9c17-804d-a217-f6b3b7c2bef8" class="">
+</p><p id="7cf6e309-0482-4f16-9d56-5c79c5d2d2a3" class="">The number of sub-pixels per pixel is determined by <code>sqrt_rate</code>. Instead of using a single sample at the pixel center, multiple samples are taken at evenly spaced locations within the pixel. Here besides the original 2-d loop (x, y), we loops into sub-pixel like this:<div class="indented"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="986c64bf-2e6b-4ae3-84e0-29a72d9ac003" class="code"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">int sqrt_rate = (int)std::sqrt(sample_rate);
+float center = 0.5f / sqrt_rate;
+float interval = 1.0f / sqrt_rate;
+
+int xidx0 = (int)((x0 - center) / interval);
+...
+int yidx2 = (int)((y2 - center) / interval);
+
+for (size_t y = minY; y &lt;= maxY; y++) {
+    for (size_t j = 0; j &lt; sqrt_rate; j++) {
+        for (size_t x = minX; x &lt;= maxX; x++) {
+            for (size_t i = 0; i &lt; sqrt_rate; i++) {
+                float sample_x = x + i / sqrt_rate + center;
+                float sample_y = y + j / sqrt_rate + center;}}}}</code></pre></div></p><p id="47b0d06c-7b21-453b-aaa2-ad799742759c" class="">Each sub-pixel is processed independently, and will be filled into the scaled <code>sample_buffer</code> .<div class="indented"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19bd7130-fb4b-4589-bce3-1b483c9eac4a" class="code"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">void RasterizerImp::fill_pixel(size_t x, size_t y, Color c) {
+    size_t sqrt_rate = sqrt(sample_rate);
+    for (size_t j = 0; j &lt; sqrt_rate; j++) {
+        for (size_t i = 0; i &lt; sqrt_rate; i++) {
+            sample_buffer[((y * sqrt_rate + j) * width * sqrt_rate + (x * sqrt_rate + i))] = c;
+        }
+    }
+}</code></pre></div></p><p id="19dfcf3e-9c17-8000-8b96-f4e7a80aa619" class="">After the supersampling, we need also average the sub-pixels’ color with in each pixel for <strong>Antialiasing.</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19dfcf3e-9c17-8040-9852-f73f3a851055" class="code"><code class="language-JavaScript">void RasterizerImp::resolve_to_framebuffer() {
+    for (size_t y = 0; y &lt; height; ++y) {
+        for (size_t x = 0; x &lt; width; ++x) {
+            Color avg_color(0, 0, 0);
+            for (int j = 0; j &lt; sqrt_rate; ++j) {
+                for (int i = 0; i &lt; sqrt_rate; ++i) {
+                    size_t index = (y * sqrt_rate + j) * width * sqrt_rate + (x * sqrt_rate + i);
+                    avg_color += sample_buffer[index];
+                }
+            }
+            avg_color *= (1.0f / sample_rate);
+        }
+    }
+}</code></pre><h3 id="9f28a983-2044-4af1-91ea-b5dca48d564b" class="">2.2 Results</h3><p id="25b4cc2f-96fd-4144-9dcd-1871e53e2d3f" class="">By averaging multiple samples per pixel, supersampling method reduces aliasing artifacts significantly. It helps reduce jagged edges, blending the color along the boundry. Shown in the below figure, the supersampling produces significantly smoother images with fewer aliasing artifacts after scale up the <code>sample_rate</code> .</p><p id="19dfcf3e-9c17-80c3-b823-c0329f556a88" class="">
+</p><div id="19dfcf3e-9c17-800a-8c7e-ec29bc8bf6e3" class="column-list"><div id="19dfcf3e-9c17-807e-9142-cc5e2ca925df" style="width:50%" class="column"><figure id="19dfcf3e-9c17-8046-927b-cf8493046401" class="image"><a href="t4_1.png"><img style="width:710px" src="t4_1.png"/></a><figcaption>sample_rate = 1</figcaption></figure></div><div id="19dfcf3e-9c17-808f-bc98-d018c8fbeb0b" style="width:50%" class="column"><figure id="19dfcf3e-9c17-802e-991f-dae6aec49266" class="image"><a href="t4_4.png"><img style="width:710px" src="t4_4.png"/></a><figcaption>sample_rate = 4</figcaption></figure></div></div><div id="19dfcf3e-9c17-8055-a05a-e1b574997927" class="column-list"><div id="19dfcf3e-9c17-8014-8c3c-f258820284c0" style="width:50%" class="column"><figure id="19dfcf3e-9c17-8038-9cf9-e534377e2a53" class="image"><a href="t4_8.png"><img style="width:710px" src="t4_8.png"/></a><figcaption>sample_rate = 8</figcaption></figure></div><div id="19dfcf3e-9c17-80bd-8765-e51ee23f4aa3" style="width:50%" class="column"><figure id="19dfcf3e-9c17-80a3-a2a1-d6a6bfdb9f96" class="image"><a href="t4_16.png"><img style="width:710px" src="t4_16.png"/></a><figcaption>sample_rate = 16</figcaption></figure></div></div><h1 id="19cfcf3e-9c17-800b-b0f4-db1831f77911" class="">Task3: Transforms</h1><p id="19dfcf3e-9c17-8043-bf4d-edd8e0dbe09a" class="">
+</p><h3 id="19dfcf3e-9c17-8058-9560-f2dcf018c453" class="">3.1 Cubeman</h3><figure id="19dfcf3e-9c17-80e7-9740-d620deed42a5" class="image"><a href="screenshot_2-16_16-50-56.png"><img style="width:710px" src="screenshot_2-16_16-50-56.png"/></a><figcaption>moving cubeman</figcaption></figure><p id="3dfda909-fdb6-4713-83e1-00700c9958a3" class="">We aim to animate the cubeman looking down at the ground, with legs crossed and arms naturally open. It looks like a dancer now.</p><h3 id="19dfcf3e-9c17-8014-b480-ee69571227c7" class="">3.2 Extra credit: More control</h3><p id="06a6afff-3c10-4008-a293-98828cea63e6" class="">To allow viewport rotation, we assigned the <code>R</code> key to rotate the view clockwise and the <code>T</code> key to rotate counterclockwise in <code>keyboard_event</code> When either key is pressed, the function <code>rotate_view(float degrees)</code> is called, adjusting the viewing transformation. </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="efe49a13-2a6b-4605-934f-97e3dbc45ec4" class="code"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">case &#x27;R&#x27;:
+    cout &lt;&lt; &quot;Rotating view clockwise&quot; &lt;&lt; endl;
+    rotate_view(5); // Rotate by 5 degrees
+    redraw();
+    break;
+
+case &#x27;T&#x27;:
+    cout &lt;&lt; &quot;Rotating view counterclockwise&quot; &lt;&lt; endl;
+    rotate_view(-5); // Rotate by -5 degrees
+    redraw();
+    break;</code></pre><p id="29087b4b-d626-4f48-b22f-23a77daf7342" class="">To apply the rotation, we modified the transformation matrices that map SVG coordinates to normalized device coordinates as the following code in <code>redraw()</code> </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="edf596e6-972b-432e-9b4a-38049a2e418e" class="code"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">float radians = view_rotation * M_PI / 180.0;
+float cos_theta = cos(radians);
+float sin_theta = sin(radians);
+
+Matrix3x3 rotation(
+    cos_theta, -sin_theta, 0,
+    sin_theta, cos_theta, 0,
+    0, 0, 1
+);
+
+svg.draw(software_rasterizer, rotation * ndc_to_screen * svg_to_ndc[current_svg]);</code></pre><p id="30177aea-f76a-45d4-ae54-2e3cc463dc2d" class="">This transformation applies the current <code>view_rotation</code> value to the scene before rendering in the function <code>rotate_view()</code> :</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="28add34a-d27a-456d-b8fa-560a7810cffe" class="code"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">void DrawRend::rotate_view(float degrees) {
+    view_rotation += degrees;
+    view_rotation = fmod(view_rotation, 360);
+}</code></pre><figure id="19dfcf3e-9c17-8008-93a6-d6924fb46e5a" class="image"><a href="rotate.png"><img style="width:384px" src="rotate.png"/></a></figure><h1 id="19cfcf3e-9c17-80fc-9d41-ca33d19b8629" class=""><strong>Task 4: Barycentric coordinates</strong></h1><p id="19cfcf3e-9c17-8060-a51b-d6f231b46760" class="">
+</p><h3 id="241b95cb-e5f1-4589-8c07-1cc43059cc17" class="">4.1 Explanation of Barycentric Coordinates</h3><p id="70177b21-56ea-4d24-9870-e932370e6626" class="">Barycentric coordinates can represent the relative position of any points within the triangle. It use three weights corresponding to 3 different triangle’s vertices. Given a triangle with vertices A, B, C. any point P inside the triangle can be represented as:</p><p id="19dfcf3e-9c17-8033-b497-f1475245f6c9" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>=</mo><msub><mi>w</mi><mn>0</mn></msub><mi>A</mi><mo>+</mo><msub><mi>w</mi><mn>1</mn></msub><mi>B</mi><mo>+</mo><msub><mi>w</mi><mn>2</mn></msub><mi>C</mi></mrow><annotation encoding="application/x-tex">P = w_0 A + w_1 B + w_2 C</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0269em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0269em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0269em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span></span></span></span></span><span>﻿</span></span> where <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>w</mi><mn>0</mn></msub><mo>+</mo><msub><mi>w</mi><mn>1</mn></msub><mo>+</mo><msub><mi>w</mi><mn>2</mn></msub><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">w_0 + w_1 + w_2 = 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0269em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0269em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0269em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span><span>﻿</span></span></p><p id="19dfcf3e-9c17-8020-b524-d21c2cc7b7d0" class="">As we can see from the left figure below, the triangle have a Red top vertex, Green left vertex and Red right vertex. We can see how the Barycentric coordinates changes in color. That’s represent the barycentric coordinates is smoothly interpolate the distance regarding to these 3 vertices.</p><p id="d4f891ba-8250-4a6d-a45f-f1325866a59a" class="">
+</p><div id="19dfcf3e-9c17-80dc-ad83-f5806282c71a" class="column-list"><div id="19dfcf3e-9c17-8010-80b4-cde692992d0c" style="width:50%" class="column"><figure id="19dfcf3e-9c17-8080-989b-e9bad2cfb915" class="image"><a href="screenshot_2-16_17-15-35.png"><img style="width:710px" src="screenshot_2-16_17-15-35.png"/></a><figcaption>R,G,B for 3 different vertices  </figcaption></figure></div><div id="19dfcf3e-9c17-80e1-8169-dc95e12be1fe" style="width:50%" class="column"><figure id="19dfcf3e-9c17-80d0-bc21-c84ab03bfba6" class="image"><a href="screenshot_2-16_17-16-5.png"><img style="width:710px" src="screenshot_2-16_17-16-5.png"/></a><figcaption>test7.svg</figcaption></figure></div></div><p id="19dfcf3e-9c17-8004-9d00-f11a39b9c8c8" class="">In our implementation, the function <code>rasterize_interpolated_color_triangle</code> performs barycentric interpolation across a triangle, computes the barycentric weights for each pixel inside the triangle and blends the colors accordingly.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="96d966be-7c3c-42e8-8d4b-bf11c104c8ca" class="code"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">void RasterizerImp::rasterize_interpolated_color_triangle(float x0, float y0, Color c0,
+		...
+    for (size_t y = minY; y &lt;= maxY; y++) {
+        for (size_t x = minX; x &lt;= maxX; x++) {
+            float w0 = edge_function(x1, y1, x2, y2, x, y) / area;
+            float w1 = edge_function(x2, y2, x0, y0, x, y) / area;
+            float w2 = 1 - w0 - w1;
+
+            if (w0 &gt;= 0 &amp;&amp; w1 &gt;= 0 &amp;&amp; w2 &gt;= 0) {
+                Color interpolated_color = w0 * c0 + w1 * c1 + w2 * c2;
+                fill_pixel(x, y, interpolated_color);
+            }
+        }
+    }
+}</code></pre><h1 id="19cfcf3e-9c17-80dd-9b86-db4397451446" class=""><strong>Task 5: “Pixel sampling” for texture mapping</strong></h1><h3 id="19dfcf3e-9c17-804d-a055-d9f52f309e2f" class="">5.1 Explain &amp; Difference</h3><p id="19dfcf3e-9c17-8033-808e-e7053a1074f2" class="">We want to texture the triangles with colors stored in a texture. Given the uv coordinate for each vertices, we need to retrieve the color correspondingly. But in practice, when rasterizing the triangle on to the image space, which is implemented as discrete grid of pixels, there will lead to aliasing. Pixel sampling is to help antialiasing by somehow adaptively sampling a certain area of texture to get smooth results.</p><p id="19dfcf3e-9c17-80f8-94bb-cf0210b4e2db" class="">There are two sampling methods. Nearest-neighbor sample the closest texel to the given texture coodinate, while bilinear sample and interpolating the adjacent texels to get average results.</p><h3 id="19dfcf3e-9c17-80e2-9167-e728ffb8c0a5" class="">5.2 Qualitative Comparison</h3><div id="19dfcf3e-9c17-8034-a934-e6d0c48ec692" class="column-list"><div id="19dfcf3e-9c17-80f5-88fd-e200d1324ae2" style="width:50%" class="column"><figure id="19dfcf3e-9c17-80b6-9f59-f9e633653844" class="image"><a href="screenshot_2-16_19-7-55.png"><img style="width:332px" src="screenshot_2-16_19-7-55.png"/></a><figcaption>Bilinear Sampling, sample_rate = 1</figcaption></figure><figure id="19dfcf3e-9c17-80ef-b15f-f1042e6f8a77" class="image"><a href="screenshot_2-16_19-8-13.png"><img style="width:332px" src="screenshot_2-16_19-8-13.png"/></a><figcaption>Bilinear Sampling, sample_rate = 16</figcaption></figure></div><div id="19dfcf3e-9c17-802a-b88f-c7daddb47ace" style="width:50%" class="column"><figure id="19dfcf3e-9c17-80ef-bf42-cc15dd7b5980" class="image"><a href="screenshot_2-16_19-7-53.png"><img style="width:332px" src="screenshot_2-16_19-7-53.png"/></a><figcaption>Nearst-pixel sampling, sample_rate = 1</figcaption></figure><figure id="19dfcf3e-9c17-803e-bbbb-d3c38e9727a1" class="image"><a href="screenshot_2-16_19-8-3.png"><img style="width:332px" src="screenshot_2-16_19-8-3.png"/></a><figcaption>Nearst-pixel Sampling, sample_rate = 1</figcaption></figure><p id="19dfcf3e-9c17-80b2-96a5-c8d8eab2e1f3" class="">
+</p></div></div><p id="19dfcf3e-9c17-80e4-a697-f54c4aeb2b47" class="">Here we list the comparison between Bilinear and Nearest Sampling. We can see that Nearest Sampling at 1 sample (right-up) produces blocky artifacts, especially along texture edges, while the Bilinear sampling at 1 sample smooth the edges and somehow blur the results. When supersampling at scale=16, both methods have good results, but when zoom in, we can still see that the Nearest Sampling will still have jagged artifact along the distorted Longitude and latitude lines.</p><p id="19dfcf3e-9c17-8094-825a-c61c1e721e5c" class="">Besides the above observation on the smooth curve case, there are several other situations that Bilinear sampling will be better than Nearst-pixel.  When the high-resolution texture mapped on the small faces, the nearest sampling will results in obvious jagged artifact. Also, if we want to make the texture transformed, like scaling or rotation, the Nearst-pixel sampling will have obvious flickering than bilinear. These are because the Nearest-pixel sampling select only the closest texel, ignore the others and thus lose some information of the original texture distribution, while bilinear sampling aggregate the closed area together</p><h1 id="19cfcf3e-9c17-80b1-b00c-f0d5ec6857ac" class=""><strong>Task 6: “Level sampling” with mipmaps for texture mapping</strong></h1><h3 id="19dfcf3e-9c17-8092-ab50-e6dfb466265d" class=""><strong>6.1 Level Sampling and Texture Mapping Implementation</strong></h3><p id="19dfcf3e-9c17-8022-b5f3-e11995e2f8b7" class="">Level sampling is a technique used in texture mapping to select an appropriate mipmap level for a given pixel based on its screen-space footprint. This helps in reducing aliasing artifacts and improving rendering efficiency. Instead of always sampling from the highest resolution texture, level sampling selects a lower resolution mipmap when the texture is minified to prevent excessive detail from causing visual distortions.</p><p id="19dfcf3e-9c17-8061-8d8a-e7bd4df65d38" class="">In our implementation, we determine the appropriate mipmap level by computing the texture footprint using the differences between adjacent texture coordinates in screen space. Specifically, we calculate the maximum of the Euclidean norms of these differences and apply a logarithm to determine the level:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19dfcf3e-9c17-8083-aff9-cc1729dd4ada" class="code"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">float L = std::max(std::sqrt(dudx * dudx + dvdx * dvdx), std::sqrt(dudy * dudy + dvdy * dvdy));
+return log2(std::max(L, 0.01f));</code></pre><h3 id="19dfcf3e-9c17-80c0-9d4a-c5d70b5589b1" class=""><strong>6.2 Trade-offs Between Sampling Techniques</strong></h3><ol type="1" id="19dfcf3e-9c17-8045-a033-f0fb9804b3d1" class="numbered-list" start="1"><li><strong>Pixel Sampling</strong><ul id="19dfcf3e-9c17-803e-9c43-c753f3556107" class="bulleted-list"><li style="list-style-type:disc"><em>Speed</em>: Nearest neighbor sampling is faster than bilinear filtering since it requires fewer texture lookups.</li></ul><ul id="19dfcf3e-9c17-807c-8d7d-cd54f5ccb8c2" class="bulleted-list"><li style="list-style-type:disc"><em>Memory Usage</em>: Both methods access a single mipmap level, consuming a similar amount of memory.</li></ul><ul id="19dfcf3e-9c17-8056-830a-ebda3d24795c" class="bulleted-list"><li style="list-style-type:disc"><em>Antialiasing Power</em>: Bilinear filtering provides smoother results, reducing aliasing compared to nearest neighbor sampling.</li></ul></li></ol><ol type="1" id="19dfcf3e-9c17-8031-bfaf-c2cd9b70bd50" class="numbered-list" start="2"><li><strong>Level Sampling</strong><ul id="19dfcf3e-9c17-80cc-a26d-dd4d51e866a5" class="bulleted-list"><li style="list-style-type:disc"><em>Speed</em>: Using L_ZERO is the fastest, as it always samples from the highest resolution texture. L_NEAREST is slightly slower, while L_LINEAR requires extra computation for interpolation but produces better results.</li></ul><ul id="19dfcf3e-9c17-8023-8152-c73ea1df60d0" class="bulleted-list"><li style="list-style-type:disc"><em>Memory Usage</em>: Mipmaps reduce memory bandwidth usage by allowing lower resolution textures to be sampled instead of the full-resolution image.</li></ul><ul id="19dfcf3e-9c17-80d0-af32-e8657f7c2ca0" class="bulleted-list"><li style="list-style-type:disc"><em>Antialiasing Power</em>: L_LINEAR significantly reduces aliasing by blending mipmap levels, whereas L_ZERO can introduce aliasing at distant views.</li></ul></li></ol><ol type="1" id="19dfcf3e-9c17-805a-b521-d072468785be" class="numbered-list" start="3"><li><strong>Number of Samples Per Pixel</strong><ul id="19dfcf3e-9c17-8035-8f95-e42e237f53c8" class="bulleted-list"><li style="list-style-type:disc"><em>Speed</em>: Increasing the number of samples per pixel directly decreases speed.</li></ul><ul id="19dfcf3e-9c17-80c4-bfa9-d18d42dae65b" class="bulleted-list"><li style="list-style-type:disc"><em>Memory Usage</em>: Higher sampling rates require multiple texture fetches per pixel, leading to increased memory usage.</li></ul><ul id="19dfcf3e-9c17-80ba-a987-e0d0248be4b0" class="bulleted-list"><li style="list-style-type:disc"><em>Antialiasing Power</em>: Higher sampling rates improve image quality by reducing jagged edges and flickering textures.</li></ul></li></ol><h3 id="19dfcf3e-9c17-80a3-a2e7-fb4b6abecc7e" class=""><strong>6.3 Results</strong></h3><div id="19dfcf3e-9c17-8029-b30d-e37ed6ee4882" class="column-list"><div id="19dfcf3e-9c17-8045-8c70-c4967be9239a" style="width:100%" class="column"><figure id="19dfcf3e-9c17-8047-bb0d-cc0df4db8640" class="image"><a href="L_ZERO_P_NEAREST.png"><img style="width:384px" src="L_ZERO_P_NEAREST.png"/></a><figcaption><code>L_ZERO</code> and <code>P_NEAREST</code></figcaption></figure><figure id="19dfcf3e-9c17-8081-b76f-ca0171f7089b" class="image"><a href="L_NEAREST_P_NEAREST.png"><img style="width:336px" src="L_NEAREST_P_NEAREST.png"/></a><figcaption><code>L_NEAREST</code> and <code>P_NEAREST</code></figcaption></figure><p id="19dfcf3e-9c17-8033-80b4-f5ff0abd3ca5" class="">
+</p></div><div id="19dfcf3e-9c17-804f-88f2-f0a267229952" style="width:100%" class="column"><figure id="19dfcf3e-9c17-806b-ada0-cd2039207e25" class="image"><a href="L_ZERO_P_LINEAR.png"><img style="width:332px" src="L_ZERO_P_LINEAR.png"/></a><figcaption><code>L_ZERO</code> and <code>P_LINEAR</code></figcaption></figure><figure id="19dfcf3e-9c17-8019-9d1a-fe56f4e7153f" class="image"><a href="L_NEAREST_P_LINEAR.png"><img style="width:332px" src="L_NEAREST_P_LINEAR.png"/></a><figcaption><code>L_NEAREST</code> and <code>P_LINEAR</code></figcaption></figure><p id="19dfcf3e-9c17-80cd-b284-f1905e47295b" class="">
+</p></div></div><figure id="19dfcf3e-9c17-8037-8898-c3570a05ee05" class="image"><a href="L_LINEAR_P_LINEAR.png"><img style="width:480px" src="L_LINEAR_P_LINEAR.png"/></a><figcaption><code>L_LINEAR</code> and <code>P_LINEAR</code></figcaption></figure><p id="19dfcf3e-9c17-8060-b6ba-eb9f3ce8a0de" class=""><strong>Moire Pattern Analysis</strong></p><ol type="1" id="19dfcf3e-9c17-80b6-be1d-c73e831eddb6" class="numbered-list" start="1"><li><strong>L_ZERO and P_NEAREST</strong>: High moire artifacts due to aliasing, as there is no filtering at either level or pixel sampling.</li></ol><ol type="1" id="19dfcf3e-9c17-8075-8811-f291c1b5ef15" class="numbered-list" start="2"><li><strong>L_ZERO and P_LINEAR</strong>: Reduces moire somewhat by smoothing pixel interpolation, but aliasing remains from high-resolution sampling.</li></ol><ol type="1" id="19dfcf3e-9c17-80ef-9222-e36415a0fb40" class="numbered-list" start="3"><li><strong>L_NEAREST and P_NEAREST</strong>: Slightly better than L_ZERO and P_NEAREST, but still suffers from visible moire due to abrupt transitions.</li></ol><ol type="1" id="19dfcf3e-9c17-80a0-a150-fd5ee18be8b6" class="numbered-list" start="4"><li><strong>L_NEAREST and P_LINEAR</strong>: Further reduces moire patterns compared to previous methods by incorporating bilinear interpolation at the pixel level.</li></ol><ol type="1" id="19dfcf3e-9c17-806b-a541-e0e8a8e2bf41" class="numbered-list" start="5"><li><strong>L_LINEAR and P_LINEAR</strong>: Best reduction in moire patterns, as both mipmap level blending and bilinear filtering create a smooth transition across textures.</li></ol><h3 id="19dfcf3e-9c17-80ff-8c5b-ffbc20e627aa" class=""><strong>6.4 Extra Credit: Summed Area Tables</strong></h3><p id="19dfcf3e-9c17-800a-ba2e-c9c20fea4228" class="">To further improve texture filtering, we implemented <em>summed area tables</em> (SAT), an efficient method for computing averaged texture values over a rectangular region. Unlike mipmapping, which provides pre-filtered levels at fixed scales, SAT allows dynamic integration over arbitrary rectangular regions.</p><p id="19dfcf3e-9c17-803d-ba4d-e82e19cc6ac1" class="">Implementation details:</p><ul id="19dfcf3e-9c17-80f1-a7d3-fed2fd909968" class="bulleted-list"><li style="list-style-type:disc">Constructed a cumulative sum of texel values for efficient lookups.</li></ul><ul id="19dfcf3e-9c17-807d-a204-f2efc1dc69d9" class="bulleted-list"><li style="list-style-type:disc">Sampled a rectangular region in the summed area table to compute the average color over a region, improving texture filtering quality.</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="19dfcf3e-9c17-805f-8330-ce1612646167" class="code"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">float r = summed_area_table[(y1 * width + x1) * 3 + 0];
+float g = summed_area_table[(y1 * width + x1) * 3 + 1];
+float b = summed_area_table[(y1 * width + x1) * 3 + 2];
+if (x0 &gt; 0) {
+    r -= summed_area_table[(y1 * tex_width + (x0 - 1)) * 3 + 0];
+    g -= summed_area_table[(y1 * tex_width + (x0 - 1)) * 3 + 1];
+    b -= summed_area_table[(y1 * tex_width + (x0 - 1)) * 3 + 2];
+}
+if (y0 &gt; 0) {
+    r -= summed_area_table[((y0 - 1) * tex_width + x1) * 3 + 0];
+    g -= summed_area_table[((y0 - 1) * tex_width + x1) * 3 + 1];
+    b -= summed_area_table[((y0 - 1) * tex_width + x1) * 3 + 2];
+}
+if (x0 &gt; 0 &amp;&amp; y0 &gt; 0) {
+    r += summed_area_table[((y0 - 1) * tex_width + (x0 - 1)) * 3 + 0];
+    g += summed_area_table[((y0 - 1) * tex_width + (x0 - 1)) * 3 + 1];
+    b += summed_area_table[((y0 - 1) * tex_width + (x0 - 1)) * 3 + 2];
+}
+float area = (x1 - x0 + 1) * (y1 - y0 + 1);
+return Color(r / area, g / area, b / area);</code></pre><figure id="19dfcf3e-9c17-804e-a755-e0071b209671" class="image"><a href="SAT.png"><img style="width:528px" src="SAT.png"/></a><figcaption>Summed-Area Table</figcaption></figure><p id="19dfcf3e-9c17-8057-89ba-ffad85de0e23" class=""><strong>Comparison Results:</strong></p><ul id="19dfcf3e-9c17-801d-be19-e9b3950be51a" class="bulleted-list"><li style="list-style-type:disc">SAT provides superior antialiasing by considering a region of texels rather than point samples and is anisotropic.</li></ul><ul id="19dfcf3e-9c17-8086-92b5-fb18431fe636" class="bulleted-list"><li style="list-style-type:disc">Compared to bilinear filtering, SAT results in fewer aliasing artifacts, particularly when zooming out on high-detail textures.</li></ul><ul id="19dfcf3e-9c17-80ef-8e92-c6e7753216df" class="bulleted-list"><li style="list-style-type:disc">However, SAT requires additional memory for storing the summed area table and slightly higher computation time for table lookups.</li></ul><p id="19dfcf3e-9c17-804e-825d-df9362c0ec40" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
