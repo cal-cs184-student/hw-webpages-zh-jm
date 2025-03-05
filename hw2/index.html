@@ -1,116 +1,912 @@
-<html>
-	<head>
-		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-		<style>
-			h1 {
-				text-align: center;
-			}
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>CS 284A HW2 Report</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
 
-			.container {
-				margin: 0 auto;
-				padding: 60px 20%;
-			}
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
 
-			figure {
-				text-align: center;
-			}
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
 
-			img {
-				display: inline-block;
-			}
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
 
-			body {
-				font-family: 'Inter', sans-serif;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="container">
-		<h1>CS184/284A Spring 2025 Homework 2 Write-Up</h1>
-		<div style="text-align: center;">Names: </div>
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
 
-		<br>
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
 
-		Link to webpage: (TODO) <a href="https://cs184.eecs.berkeley.edu/sp25">cs184.eecs.berkeley.edu/sp25</a>
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
 
-		<br>
-		
-		Link to GitHub repository: (TODO) <a href="https://cs184.eecs.berkeley.edu/sp25">cs184.eecs.berkeley.edu/sp25</a>
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
 
-		<figure>
-			<img src="teapot.png" alt="Teapot" style="width:50%"/>
-			<figcaption>You can add images with captions!</figcaption>
-		</figure>
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
 
-		<!--
-		We've already added one heading per part, to make your write-up as navigable when grading. Please fit your write-up within these sections!
-		-->
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
 
-		<h2>Overview</h2>
-		Give a high-level overview of what you implemented in this homework. Think about what you've built as a whole. Share your thoughts on what interesting things you've learned from completing the homework.
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
 
-		<h2>Section I: Bezier Curves and Surfaces</h2>
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
 
-		<h3>Part 1: Bezier curves with 1D de Casteljau subdivision</h3>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
 
-		<p>Here is an example 2x2 gridlike structure using an HTML table. Each <b>tr</b> is a row and each <b>td</b> is a column in that row. You might find this useful for framing and showing your result images in an organized fashion.</p>
-		<div style="display: flex; flex-direction: column; align-items: center;">
-			<table style="width: 100%; text-align: center; border-collapse: collapse;">
-			  <tr>
-				<td style="text-align: center;">
-				  <img src="teapot.png" width="400px"/>
-				  <figcaption>Caption goes here.</figcaption>
-				</td>
-				<td style="text-align: center;">
-				  <img src="teapot.png" width="400px"/>
-				  <figcaption>Caption goes here.</figcaption>
-				</td>
-			  </tr>
-			  <tr>
-				<td style="text-align: center;">
-				  <img src="teapot.png" width="400px"/>
-				  <figcaption>Caption goes here.</figcaption>
-				</td>
-				<td style="text-align: center;">
-				  <img src="teapot.png" width="400px"/>
-				  <figcaption>Caption goes here.</figcaption>
-				</td>
-			  </tr>
-			</table>
-		</div>
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
 
-		<h3>Part 2: Bezier surfaces with separable 1D de Casteljau</h3>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+mark {
+	background-color: transparent;
+}
 
-		<h2>Section II: Triangle Meshes and Half-Edge Data Structure</h2>
+.indented {
+	padding-left: 1.5em;
+}
 
-		<h3>Part 3: Area-weighted vertex normals</h3>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
 
-		<h3>Part 4: Edge flip</h3>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+img {
+	max-width: 100%;
+}
 
-		<h3>Part 5: Edge split</h3>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
 
-		<h3>Part 6: Loop subdivision for mesh upsampling</h3>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+@page {
+	margin: 1in;
+}
 
-		<h2>(Optional) Section III: Potential Extra Credit - Art Competition: Model something Creative</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+.collection-content {
+	font-size: 0.875rem;
+}
 
-		<h2>Additional Notes (please remove)</h2>
-		<ul>
-			<li>You can also add code if you'd like as so: <code>code code code</code></li>
-			<li>If you'd like to add math equations, 
-				<ul>
-					<li>You can write inline equations like so: \( a^2 + b^2 = c^2 \)</li>
-					<li>You can write display equations like so: \[ a^2 + b^2 = c^2 \]</li>
-				</ul>
-			</li>
-		</ul>
-		</div>
-	</body>
-</html>
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1acab2cd-cd5c-80d2-82ae-f120b6a534a6" class="page sans"><header><h1 class="page-title">CS 284A HW2 Report</h1><p class="page-description"></p></header><div class="page-body"><p id="1acab2cd-cd5c-809a-ba04-e5b5bd779375" class="">Zihan Liao, Junming Chen</p><p id="1acab2cd-cd5c-8038-9814-c05aa5192977" class="">Webpage: <a href="https://cal-cs184-student.github.io/hw-webpages-zh-jm/">https://cal-cs184-student.github.io/hw-webpages-zh-jm/</a></p><p id="1acab2cd-cd5c-8023-bb59-d8c46fcb6ca2" class="">GitHub: <a href="https://github.com/cal-cs184-student/sp25-hw2-sustech-hw2">https://github.com/cal-cs184-student/sp25-hw2-sustech-hw2</a></p><h1 id="1acab2cd-cd5c-8027-972e-fbc15c8f9478" class="">Overview</h1><p id="1acab2cd-cd5c-8088-a5d3-d8b160edbdcd" class="">In homework 2, we successfully implemented the knowledge of curve and mesh, including generating curves and surfaces with control points, mesh manipulation and geometry processing. Even though these knowledge looks hard at first time when we see it, but eventually we gained lots of fun and a great sense of achievement. It’s so interesting to see that we can process the mesh just like in Blender.</p><h1 id="1acab2cd-cd5c-8082-9741-f78d1a82327c" class="">Part1: <strong>Bezier Curves with 1D de Casteljau Subdivision</strong></h1><p id="1acab2cd-cd5c-8087-ae94-c345b453b479" class="">The de Casteljau’s algorithm evaluate the Bezier curves recursively based on a set of control points. Basically, we need 3 control points to form a Bezier curve. When we have more control points than that, we need to repeated this process using a parameter t to get a fewer new medium control points until only one point remains. When t move from 0 to 1, this point will form a path of corresponding Bezier curves. In function <code>evaluateStep</code> , we input the 2D control points and it will perfroms one round of interpolation and return a fewer set of new points.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1acab2cd-cd5c-80a8-af8f-e2b9d317d2c7" class="code"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">std::vector&lt;Vector2D&gt; BezierCurve::evaluateStep(std::vector&lt;Vector2D&gt; const&amp; points)
+  {
+    if (points.size() &lt; 2) {
+      return points;
+    }
+    std::vector&lt;Vector2D&gt; nextPoints(points.size() - 1);
+    for (size_t i = 0; i &lt; points.size() - 1; ++i) {
+      Vector2D interpolated = (1 - t) * points[i] + t * points[i + 1];
+      nextPoints[i] = interpolated;
+    }
+    return nextPoints;
+  }
+</code></pre><p id="1adab2cd-cd5c-800a-a555-df50d399fe47" class="">
+</p><p id="1acab2cd-cd5c-80c9-8d30-c0eddfbe1fbf" class="">Here is the result showing how to gradually get the final evaluated point.</p><div id="1adab2cd-cd5c-80a8-aadd-d6b45bf7ea78" class="column-list"><div id="1adab2cd-cd5c-80f7-bb06-c104c539c097" style="width:50%" class="column"><figure id="1adab2cd-cd5c-80d7-a00c-c1b2e393969a" class="image"><a href="image.png"><img style="width:294.46875px" src="image.png"/></a><figcaption>Step=1</figcaption></figure><figure id="1adab2cd-cd5c-801e-abcf-e75ac6eb7f87" class="image"><a href="image%201.png"><img style="width:294.484375px" src="image%201.png"/></a><figcaption>Step=3</figcaption></figure></div><div id="1adab2cd-cd5c-80be-8822-f9e527625386" style="width:50%" class="column"><figure id="1adab2cd-cd5c-8070-a728-cb2814122d12" class="image"><a href="image%202.png"><img style="width:294.484375px" src="image%202.png"/></a><figcaption>Step=2</figcaption></figure><figure id="1adab2cd-cd5c-80b0-bc61-cba62fb4c82f" class="image"><a href="image%203.png"><img style="width:294.484375px" src="image%203.png"/></a><figcaption>Step=4</figcaption></figure></div></div><div id="1adab2cd-cd5c-8055-a963-c3fb31b7474f" class="column-list"><div id="1adab2cd-cd5c-80c9-9e3e-cadd5a45f084" style="width:50%" class="column"><figure id="1adab2cd-cd5c-8002-ba02-e2f34f1a7d92" class="image"><a href="image%204.png"><img style="width:294.484375px" src="image%204.png"/></a><figcaption>Bezier Curve with 6 control points</figcaption></figure></div><div id="1adab2cd-cd5c-80e7-a8c6-c3dd92546674" style="width:50%" class="column"><figure id="1adab2cd-cd5c-8050-9b16-eacec91cdb7e" class="image"><a href="image%205.png"><img style="width:294.484375px" src="image%205.png"/></a><figcaption>Slightly different curve by change one control point and parameter t</figcaption></figure></div></div><h1 id="1acab2cd-cd5c-8073-8819-f429ee599520" class="">Part2: <strong>Bezier Surfaces with Separable 1D de Casteljau</strong></h1><p id="1acab2cd-cd5c-80da-9667-ea434ba1e765" class="">Once have the Bezier curves, we can use a grid of 3D control points to extends to Bezier surfaces. </p><p id="1adab2cd-cd5c-801d-bc24-d3267f0e086d" class="">First, for each row of control points representing a curve, we need to computes an intermediate point using the same u parameter by applying the same one-dimensional <code>evaluate1D</code> . This is based on loop a 3D vector based <code>evaluateStep</code> until we get the final evaluate point.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1adab2cd-cd5c-80e6-9011-ce7935a35ef5" class="code"><code class="language-C++">  Vector3D BezierPatch::evaluate1D(std::vector&lt;Vector3D&gt; const &amp;points, double t) const
+  {
+    std::vector&lt;Vector3D&gt; intermediatePoints = points;
+    while (intermediatePoints.size() &gt; 1) {
+      intermediatePoints = evaluateStep(intermediatePoints, t);
+    }
+    return intermediatePoints.front();
+  }</code></pre><p id="1acab2cd-cd5c-8012-9a36-d36ec6fdfff5" class="">From that, we now get a group of intermediate points with the parameter u. We now evaluated again on these points using the parameter v to form a new Bezier curve with the <code>evaluate1D</code> function again to obtain the final point on the surface.  <code>BezierPatch</code> class encapsulates this approach, where the function evaluate carries out the evaluation first along the u direction for each row of control points and then along the v direction over the resulting intermediate points. Here is the result of our teaport:</p><figure id="1adab2cd-cd5c-800a-a5df-caead6abcdd6" class="image"><a href="image%206.png"><img style="width:588px" src="image%206.png"/></a></figure><p id="1acab2cd-cd5c-80dd-9f77-f247eca8a9e0" class="">
+</p><h1 id="1acab2cd-cd5c-80ee-a2e5-ec1b4452d0d3" class="">Part3: <strong>Area-Weighted Vertex Normals</strong></h1><p id="1adab2cd-cd5c-800c-a95c-cdda18b76a06" class="">Area-weighted vertex normal is computed the vertex normal by including it’s by iterating over all faces incident to it and summing up each face&#x27;s contribution proportionally to its area.</p><p id="1adab2cd-cd5c-8049-a731-e9c46e69e175" class="">We will first loop all incident faces starting from a halfedge of the vertex. For each face, we will find their vertices and compute the face normal by cross product two edge vectors in clock-wise, where the face area is the half of the magnitude. Then we will just get a weighted average face normal from that, and normalize it to get the final direction of that face normal.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1adab2cd-cd5c-807e-b358-fd42d0ff0809" class="code"><code class="language-C++">Vector3D Vertex::normal( void ) const
+  {
+		HalfedgeCIter h = halfedge();
+		Vector3D normal = Vector3D(0, 0, 0);
+
+    do {
+      if (!h-&gt;face()-&gt;isBoundary()) {
+        // Triangle vertices
+        Vector3D v0 = position;  // Current vertex position
+        Vector3D v1 = h-&gt;next()-&gt;vertex()-&gt;position;
+        Vector3D v2 = h-&gt;next()-&gt;next()-&gt;vertex()-&gt;position;
+
+        // Compute face normal using cross product
+        Vector3D faceNormal = cross(v1 - v0, v2 - v0);
+        double area = faceNormal.norm() / 2.0;  // Triangle area
+
+        // Accumulate area-weighted normal
+        normal += area * h-&gt;face()-&gt;normal();
+      }
+      // Move to the next triangle around the vertex
+      h = h-&gt;twin()-&gt;next();
+    } while (h != halfedge());
+
+    return normal.unit(); // Normalize the accumulated normal
+  }</code></pre><p id="1adab2cd-cd5c-808a-9d12-ea8303f6024c" class="">Here is our comparison between with and without vertex normal.</p><div id="1adab2cd-cd5c-806b-8e2a-f5644fe7b44f" class="column-list"><div id="1adab2cd-cd5c-805a-92ff-d64c7e7aa54c" style="width:50%" class="column"><figure id="1adab2cd-cd5c-8040-8caa-e61e28ad59b6" class="image"><a href="ace9fe1a-d9d8-45fa-b6e7-f8dc1949c70a.png"><img style="width:535.5102040816327px" src="ace9fe1a-d9d8-45fa-b6e7-f8dc1949c70a.png"/></a><figcaption>Teaport flat shading (w/o normal)</figcaption></figure><p id="1adab2cd-cd5c-8014-8895-f8a8463d8e12" class="">
+</p></div><div id="1adab2cd-cd5c-80f6-aeb8-f11ca43b6096" style="width:50%" class="column"><figure id="1adab2cd-cd5c-8084-8e9a-e74a79e338ca" class="image"><a href="image%207.png"><img style="width:294.484375px" src="image%207.png"/></a><figcaption>Teaport Phong shading, with vertex normal</figcaption></figure><p id="1adab2cd-cd5c-8052-ad80-e57a0f259750" class="">
+</p><p id="1adab2cd-cd5c-806d-83ea-dbf256ca4ff8" class="">
+</p></div></div><h1 id="1acab2cd-cd5c-80be-b904-f155e5a1a5e6" class=""><strong>Part 4: Edge Flip</strong></h1><p id="1adab2cd-cd5c-80e8-b826-ecefd24250d3" class="">To flip a edge, we should first check if it’s a boundary edge. If not, then no flip will be applied.  For a halfedge, we find the triangles (a, b, c) and (c, b, d). We assume that</p><ul id="1adab2cd-cd5c-807f-b04d-d1f60f75554f" class="bulleted-list"><li style="list-style-type:disc">b: current vertex of h0.</li></ul><ul id="1adab2cd-cd5c-80a1-8a44-f65f10cec496" class="bulleted-list"><li style="list-style-type:disc">c: current vertex of the twin h1.</li></ul><ul id="1adab2cd-cd5c-80be-bca6-debf73c04716" class="bulleted-list"><li style="list-style-type:disc">a: vertex opposite to b in the first triangle.</li></ul><ul id="1adab2cd-cd5c-804a-9ebd-dd1f3b071fbe" class="bulleted-list"><li style="list-style-type:disc">d: vertex opposite to c in the second triangle.</li></ul><p id="1adab2cd-cd5c-80ea-9f8e-f05e7ec7f077" class="">Then for all who affected by the edge flip, we need to reassign the pointers to them by calling <code>setNeighbors()</code> for each halfedge, which ensure that the next, twin, vertex and face pointers will be update in correct order.</p><p id="1adab2cd-cd5c-80cd-b7cd-d52ade6aa840" class="">
+</p><p id="1adab2cd-cd5c-8046-80e7-cefeca9cc16c" class=""><strong>Debugging. </strong>We forgot to reassign all pointers for every affected elements, and got stuck in it cause the debugging is a little bit complecate. We also tried to printout the updated halfedge to help to check the process. Here is our implementation.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1acab2cd-cd5c-8091-9bd3-f2f8f267021c" class="code"><code class="language-C++">EdgeIter HalfedgeMesh::flipEdge( EdgeIter e0 )
+  {
+		if (e0-&gt;isBoundary()) {
+			return e0;
+		}
+		VertexIter b = e0-&gt;halfedge()-&gt;vertex();
+		VertexIter c = e0-&gt;halfedge()-&gt;twin()-&gt;vertex();
+		VertexIter a = e0-&gt;halfedge()-&gt;next()-&gt;twin()-&gt;vertex();
+		VertexIter d = e0-&gt;halfedge()-&gt;twin()-&gt;next()-&gt;twin()-&gt;vertex();
+		HalfedgeIter h0 = e0-&gt;halfedge();
+		HalfedgeIter h1 = e0-&gt;halfedge()-&gt;twin();
+		HalfedgeIter hb0 = h0-&gt;next();
+		HalfedgeIter hb1 = hb0-&gt;next();
+		HalfedgeIter hb2 = h1-&gt;next();
+		HalfedgeIter hb3 = hb2-&gt;next();
+		FaceIter f0 = h0-&gt;face();
+		FaceIter f1 = h1-&gt;face();
+		f0-&gt;halfedge() = h0;
+		f1-&gt;halfedge() = h1;
+		h0-&gt;setNeighbors(hb3, h1, a, e0, f0);
+		h1-&gt;setNeighbors(hb1, h0, d, e0, f1);
+		hb0-&gt;setNeighbors(h0, hb0-&gt;twin(), c, hb0-&gt;edge(), f0);
+		hb1-&gt;setNeighbors(hb2, hb1-&gt;twin(), a, hb1-&gt;edge(), f1);
+		hb2-&gt;setNeighbors(h1, hb2-&gt;twin(), b, hb2-&gt;edge(), f1);
+		hb3-&gt;setNeighbors(hb0, hb3-&gt;twin(), d, hb3-&gt;edge(), f0);
+		a-&gt;halfedge() = h0;
+		d-&gt;halfedge() = h1;
+		c-&gt;halfedge() = hb0;
+		b-&gt;halfedge() = hb2;
+    return e0;
+  }</code></pre><p id="1adab2cd-cd5c-8064-826f-e94fff298af6" class="">
+</p><p id="1acab2cd-cd5c-80ba-a7a8-fc6fd7a26f88" class="">Here is the result after flipping 3 edge.</p><figure id="1adab2cd-cd5c-8035-8ba0-fad9f0c74afc" class="image"><a href="image%208.png"><img style="width:631px" src="image%208.png"/></a><figcaption>After edge flip showing in the red bbox.</figcaption></figure><h1 id="1acab2cd-cd5c-80ea-b93c-f2fa501f17cf" class=""><strong>Part 5: Edge Split</strong></h1><p id="1adab2cd-cd5c-808a-8a00-ca6ef1bc10a7" class="">
+</p><p id="1adab2cd-cd5c-80ab-b7b9-da7916e3d70a" class="">
+</p><figure id="1adab2cd-cd5c-80f4-a0ad-e5c12c232f6c" class="image"><a href="image%209.png"><img style="width:709.984375px" src="image%209.png"/></a><figcaption>Example of edge split</figcaption></figure><figure id="1adab2cd-cd5c-8043-8791-df8a46d3b8be" class="image"><a href="image%2010.png"><img style="width:262px" src="image%2010.png"/></a><figcaption>Both split and flip</figcaption></figure><p id="1adab2cd-cd5c-80d4-b3cf-eb2b890166ed" class="">Here is the implementation of our function <code>splitEdge()</code> . For this non-boundary edge, we can just insert a new vertex at the target edge, and then create a group of new halfedges, faces, edges and reconnecte them in correct order. First of all, we need to retrieve the two half-edges of the target edge, and find the four surround vertices. Then a new vertex is created at middle of the two end vertices. By calling the function <code>setNeighbors()</code> , we finally update the new half-edge.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1adab2cd-cd5c-80e6-b036-c6c674a4d671" class="code"><code class="language-C++">VertexIter HalfedgeMesh::splitEdge(EdgeIter e0)
+  {
+    if (!e0-&gt;isBoundary()) {
+			HalfedgeIter h0 = e0-&gt;halfedge();
+      HalfedgeIter h1 = h0-&gt;twin();
+      HalfedgeIter hb0 = h0-&gt;next();
+      HalfedgeIter hb1 = hb0-&gt;next();
+			HalfedgeIter hb2 = h1-&gt;next();
+      HalfedgeIter hb3 = hb2-&gt;next();
+			VertexIter v0 = h0-&gt;vertex();
+      VertexIter v1 = h1-&gt;vertex();
+			VertexIter v2 = hb1-&gt;vertex();
+			VertexIter v3 = hb3-&gt;vertex();
+			FaceIter f0 = h0-&gt;face();
+			FaceIter f1 = h1-&gt;face();
+
+			VertexIter vnew = newVertex();
+			vnew-&gt;position = (v0-&gt;position + v1-&gt;position) / 2;
+			vnew-&gt;halfedge() = h0;
+
+			HalfedgeIter h2 = newHalfedge();
+			HalfedgeIter h3 = newHalfedge();
+			HalfedgeIter h4 = newHalfedge();
+			HalfedgeIter h5 = newHalfedge();
+			HalfedgeIter h6 = newHalfedge();
+			HalfedgeIter h7 = newHalfedge();
+
+			EdgeIter e1 = newEdge();
+			EdgeIter e2 = newEdge();
+			EdgeIter e3 = newEdge();
+
+			FaceIter f2 = newFace();
+			FaceIter f3 = newFace();
+
+			h0-&gt;setNeighbors(hb0, h1, vnew, e0, f0);
+			...
+			...
+			h7-&gt;setNeighbors(hb3, h6, vnew, e3, f1);
+			hb0-&gt;setNeighbors(h5, hb0-&gt;twin(), v1, hb0-&gt;edge(), f0);
+			hb1-&gt;setNeighbors(h2, hb1-&gt;twin(), v2, hb1-&gt;edge(), f2);
+			hb2-&gt;setNeighbors(h6, hb2-&gt;twin(), v0, hb2-&gt;edge(), f3);
+			hb3-&gt;setNeighbors(h1, hb3-&gt;twin(), v3, hb3-&gt;edge(), f1);
+
+			e1-&gt;halfedge() = h2;
+			e2-&gt;halfedge() = h4; e2-&gt;isNew = true;
+			e3-&gt;halfedge() = h6; e3-&gt;isNew = true;
+
+			f0-&gt;halfedge() = h0;
+			...
+			f3-&gt;halfedge() = h6;
+
+      v0-&gt;halfedge() = h2;
+			return vnew;
+    }</code></pre><p id="1adab2cd-cd5c-80bf-afb9-fdf342336fc7" class=""><strong>Extra Credit</strong>. Here we support the boundary edges’s split. For the boundary edge, we should first find the valid half-edge. After that, we just follow the internal edge case to creat new vertex. But since only one face is adjacent, we should only create correspoding face to carefully deal update the connectivity.</p><div id="1adab2cd-cd5c-8017-aecc-d11a90150e52" class="column-list"><div id="1adab2cd-cd5c-8005-b704-cf8938248c8f" style="width:50%" class="column"><figure id="1adab2cd-cd5c-80d2-ae10-cf2036344bef" class="image"><a href="image%2011.png"><img style="width:235px" src="image%2011.png"/></a><figcaption>Boundary edge, before split</figcaption></figure></div><div id="1adab2cd-cd5c-8022-a486-d756aafa537d" style="width:50%" class="column"><figure id="1adab2cd-cd5c-8006-9d4d-c9fee3dc08b3" class="image"><a href="image%2012.png"><img style="width:166px" src="image%2012.png"/></a><figcaption>Boundary edge, after split</figcaption></figure></div></div><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1acab2cd-cd5c-8021-a61b-ff7827572c85" class="code"><code class="language-C++">			
+		HalfedgeIter h0 = e0-&gt;halfedge();
+	  if (h0-&gt;isBoundary()) {
+			h0 = h0-&gt;twin();
+	  }
+		HalfedgeIter h1 = h0-&gt;twin();
+		HalfedgeIter hb0 = h0-&gt;next();
+		HalfedgeIter hb1 = hb0-&gt;next();
+	  VertexIter v0 = h0-&gt;vertex();
+	  VertexIter v1 = h1-&gt;vertex();
+	  VertexIter v2 = hb1-&gt;vertex();
+		FaceIter f0 = h0-&gt;face();
+		FaceIter f1 = h1-&gt;face();
+	
+	  VertexIter vnew = newVertex();
+	  vnew-&gt;position = (v0-&gt;position + v1-&gt;position) / 2;
+	  vnew-&gt;halfedge() = h0;
+	
+	  HalfedgeIter h2 = newHalfedge();
+	  ...
+	
+	  EdgeIter e1 = newEdge();
+	  EdgeIter e2 = newEdge();
+	
+	  FaceIter f2 = newFace();
+	  FaceIter f3 = newBoundary();
+	
+	  h0-&gt;setNeighbors(hb0, h1, vnew, e0, f0);
+	  ...
+	  h1-&gt;setNeighbors(h3, h0, v1, e0, f1);
+	  hb0-&gt;setNeighbors(h5, hb0-&gt;twin(), v1, hb0-&gt;edge(), f0);
+	  hb1-&gt;setNeighbors(h2, hb1-&gt;twin(), v2, hb1-&gt;edge(), f2);
+	
+		e1-&gt;halfedge() = h2;
+		e2-&gt;halfedge() = h4; e2-&gt;isNew = true;
+	
+	  f0-&gt;halfedge() = h0;
+	  ...
+	
+	  v0-&gt;halfedge() = h2;
+	  return vnew;
+</code></pre><h1 id="1acab2cd-cd5c-8039-a9f4-da28157a4fd1" class=""><strong>Part 6: Loop Subdivision for Mesh Upsampling</strong></h1><p id="1adab2cd-cd5c-80ef-96ce-e1a635d83854" class="">To upsampling a mesh, we need to loop subdivision it. First of all, we need to iterate over all vertices to calculate the sum of neighboring vertices’ positions under the loop subdivision rule. Also in the implementation, we should also mark each vertex as <code>isNew = false</code> . </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1adab2cd-cd5c-80bc-b31d-f569854c6475" class="code"><code class="language-C++">for (VertexIter v = mesh.verticesBegin(); v != mesh.verticesEnd(); v++) {
+    v-&gt;isNew = false;
+    Vector3D sum = Vector3D(0, 0, 0);
+    int n = 0;
+    HalfedgeIter h = v-&gt;halfedge();
+    do {
+        sum += h-&gt;twin()-&gt;vertex()-&gt;position;
+        n++;
+        h = h-&gt;twin()-&gt;next();
+    } while (h != v-&gt;halfedge());
+    double u = n == 3 ? 3.0 / 16.0 : 3.0 / (8.0 * n);
+    v-&gt;newPosition = (1 - n * u) * v-&gt;position + u * sum;
+}</code></pre><p id="1acab2cd-cd5c-806d-86c9-c9d9ee9d1419" class="">Then, we need to update the new edges’ position by it’s endpoints and the neighboring vertices.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1adab2cd-cd5c-80fb-84c7-cea10b4ced57" class="code"><code class="language-C++">for (EdgeIter e = mesh.edgesBegin(); e != mesh.edgesEnd(); e++) {
+    e-&gt;isNew = false;
+    if (e-&gt;isBoundary()) {
+        HalfedgeIter h = e-&gt;halfedge();
+        if (h-&gt;isBoundary()) {
+            h = h-&gt;twin();
+        }
+        e-&gt;newPosition = 2.0 / 5.0 * h-&gt;vertex()-&gt;position
+                       + 2.0 / 5.0 * h-&gt;twin()-&gt;vertex()-&gt;position
+                       + 1.0 / 5.0 * h-&gt;next()-&gt;next()-&gt;vertex()-&gt;position;
+    } else {
+        e-&gt;newPosition = 3.0 / 8.0 * e-&gt;halfedge()-&gt;vertex()-&gt;position
+                       + 3.0 / 8.0 * e-&gt;halfedge()-&gt;twin()-&gt;vertex()-&gt;position
+                       + 1.0 / 8.0 * e-&gt;halfedge()-&gt;next()-&gt;next()-&gt;vertex()-&gt;position
+                       + 1.0 / 8.0 * e-&gt;halfedge()-&gt;twin()-&gt;next()-&gt;next()-&gt;vertex()-&gt;position;
+    }</code></pre><p id="1adab2cd-cd5c-80a9-8f2c-d5c3b195adb1" class="">After these, we can now start splitting the edges and set the new vertex’s position. We will also flip the new edges if it connets an old vertex and new vertex.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1adab2cd-cd5c-8042-9c9d-ef682eb352ae" class="code"><code class="language-C++">std::vector&lt;EdgeIter&gt; originalEdges;
+for (EdgeIter e = mesh.edgesBegin(); e != mesh.edgesEnd(); e++) {
+    originalEdges.push_back(e);
+}
+for (EdgeIter e : originalEdges) {
+    Vector3D p = e-&gt;newPosition;
+    VertexIter vnew = mesh.splitEdge(e);
+    vnew-&gt;isNew = true;
+    vnew-&gt;newPosition = p;
+}
+for (EdgeIter e = mesh.edgesBegin(); e != mesh.edgesEnd(); e++) {
+    if (e-&gt;isNew) {
+        HalfedgeIter h = e-&gt;halfedge();
+        if (h-&gt;vertex()-&gt;isNew != h-&gt;twin()-&gt;vertex()-&gt;isNew) {
+            mesh.flipEdge(e);
+        }
+    }
+}
+</code></pre><p id="1adab2cd-cd5c-80f3-9c35-cfd60eb8954b" class=""><strong>Mesh after loop subdivision. </strong>As we can see in the following figure, the cube is subdivied and turn to a much more circle boundary. The boundary will be smoothed because we are updating the new vertex positions by averaging the neighboring vertices positions, which make them close to each other smoothly. </p><figure id="1adab2cd-cd5c-80ef-8f9f-f2071620523f" class="image"><a href="image%2013.png"><img style="width:331.984375px" src="image%2013.png"/></a><figcaption>Loop Subdivision 3, original</figcaption></figure><p id="1adab2cd-cd5c-8018-a4ab-fdd21d1c4b84" class="">To reduce the smoothing effect on sharp corners and edges, we can just pre-splitting the target edges to add vertices along the edges we want to preserve as sharp.</p><figure id="1adab2cd-cd5c-8019-9b53-c40c60ce577b" class="image"><a href="image%2014.png"><img style="width:331.984375px" src="image%2014.png"/></a><figcaption>Loop Subdivision 3, with pre-split when initialization.</figcaption></figure><p id="1adab2cd-cd5c-8081-9135-c05d04e5a6d3" class="">
+</p><p id="1adab2cd-cd5c-8047-b6d6-facf73bcdd12" class="">Here shows our <strong>Loop subdivision results</strong>. </p><div id="1adab2cd-cd5c-80ff-b6b3-de52c6ad1c7f" class="column-list"><div id="1adab2cd-cd5c-804f-84a9-ebb8f632f9e2" style="width:50%" class="column"><figure id="1adab2cd-cd5c-808d-998d-e79709403cae" class="image"><a href="image%2015.png"><img style="width:331.984375px" src="image%2015.png"/></a><figcaption>Loop Subdivision 1</figcaption></figure></div><div id="1adab2cd-cd5c-80e0-9ff6-e42e37b437ef" style="width:50%" class="column"><figure id="1adab2cd-cd5c-8041-a140-e532793b8887" class="image"><a href="image%2016.png"><img style="width:331.96875px" src="image%2016.png"/></a><figcaption>Loop Subdivision 2</figcaption></figure></div></div><div id="1adab2cd-cd5c-804d-b58f-d582f1972e43" class="column-list"><div id="1adab2cd-cd5c-80b4-b290-c72afe443893" style="width:50%" class="column"><figure id="1adab2cd-cd5c-807a-9fc5-d5e66e92c774" class="image"><a href="image%2013.png"><img style="width:331.984375px" src="image%2013.png"/></a><figcaption>Loop Subdivision 3</figcaption></figure></div><div id="1adab2cd-cd5c-80c9-9a4f-e31b9022f928" style="width:50%" class="column"><figure id="1adab2cd-cd5c-806c-91c6-daa4832c6acd" class="image"><a href="image%2017.png"><img style="width:331.984375px" src="image%2017.png"/></a><figcaption>Loop Subdivision 4</figcaption></figure><p id="1adab2cd-cd5c-8033-8af9-f6f9f761a7cf" class="">
+</p></div></div><p id="1adab2cd-cd5c-80f5-b863-e020e871f54a" class="">
+</p><p id="1adab2cd-cd5c-806e-a8e7-f83cc95a65ea" class=""><strong>Solve Asymmetric by pre-flips and splits. </strong>As we can see in the above results, the smoothed mesh is not asymmetric. That’s because the the initial cube is not regular, which cause the consecutive subdivision have unequal distribution for each four directions. </p><p id="1adab2cd-cd5c-80d7-945e-c4dae8e6c544" class="">Here, for example, for the initial cube, we split the diagonal edge to make it more symmetric than before.</p><div id="1adab2cd-cd5c-8046-be7f-d513239cde49" class="column-list"><div id="1adab2cd-cd5c-80a3-ab65-f892464599e5" style="width:50%" class="column"><figure id="1adab2cd-cd5c-806b-9320-d072afd322ca" class="image"><a href="image%2013.png"><img style="width:331.984375px" src="image%2013.png"/></a><figcaption>Loop Subdivision 3, original</figcaption></figure></div><div id="1adab2cd-cd5c-8027-a734-e2622f66fb9a" style="width:50.000000000000014%" class="column"><figure id="1adab2cd-cd5c-8061-a62f-e7781c3c9e38" class="image"><a href="image%2014.png"><img style="width:331.984375px" src="image%2014.png"/></a><figcaption>Loop Subdivision 3, with pre-split when initialization.</figcaption></figure></div></div><p id="1adab2cd-cd5c-8080-a00a-d9138f012f71" class="">We can also try to pre-flip the initial cube, to ensure the mesh structure is more uniform distributed. Here we flip the edges pointed by the red arrows, to make the front face distributed the same to the four directions. After further loop subdivision, we can see in the following results, that the light now is much more uniformly distributed than a square-like partern.</p><div id="1adab2cd-cd5c-8002-8b89-c6fa682a5f79" class="column-list"><div id="1adab2cd-cd5c-8025-b4ed-d421cdb0c677" style="width:50.000000000000014%" class="column"><figure id="1adab2cd-cd5c-8052-b2cf-de147bd99ee9" class="image"><a href="image%2018.png"><img style="width:331.984375px" src="image%2018.png"/></a><figcaption>Loop Subdivision 1, before flip.</figcaption></figure></div><div id="1adab2cd-cd5c-80b6-abd2-ef62eb8774a0" style="width:50%" class="column"><figure id="1adab2cd-cd5c-802e-a879-c700dc88f5ef" class="image"><a href="image%2019.png"><img style="width:331.984375px" src="image%2019.png"/></a><figcaption>Loop Subdivision 1, after flip.</figcaption></figure></div></div><p id="1adab2cd-cd5c-8060-b4e2-d80dceb51468" class="">
+</p><div id="1adab2cd-cd5c-804b-b3e8-d80fad900bd0" class="column-list"><div id="1adab2cd-cd5c-8057-92d8-da21bb6d8787" style="width:50%" class="column"><figure id="1adab2cd-cd5c-8075-9613-c5d0bfb310a0" class="image"><a href="image%2013.png"><img style="width:331.984375px" src="image%2013.png"/></a><figcaption>Loop Subdivision 3, no flip.</figcaption></figure></div><div id="1adab2cd-cd5c-8019-bf0f-ebea963db28a" style="width:50%" class="column"><figure id="1adab2cd-cd5c-80e0-86b7-d7854cc9b99a" class="image"><a href="image%2020.png"><img style="width:331px" src="image%2020.png"/></a><figcaption>Loop Subdivision 3, after flip.</figcaption></figure></div></div><p id="1adab2cd-cd5c-8095-b496-e969d7f06eb5" class="">
+</p><p id="1adab2cd-cd5c-8083-bef5-fde66b8dcd35" class="">
+</p><p id="1adab2cd-cd5c-80cd-be6c-f7d6888350a0" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
