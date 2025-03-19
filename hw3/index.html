@@ -1,106 +1,913 @@
-<html>
-	<head>
-		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-		<style>
-			h1 {
-				text-align: center;
-			}
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>CS 284A HW3 Report</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
 
-			.container {
-				margin: 0 auto;
-				padding: 60px 20%;
-			}
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
 
-			figure {
-				text-align: center;
-			}
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
 
-			img {
-				display: inline-block;
-			}
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
 
-			body {
-				font-family: 'Inter', sans-serif;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="container">
-		<h1>CS184/284A Spring 2025 Homework 3 Write-Up</h1>
-		<div style="text-align: center;">Names: </div>
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
 
-		<br>
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
 
-		Link to webpage: (TODO) <a href="https://cs184.eecs.berkeley.edu/sp25">cs184.eecs.berkeley.edu/sp25</a>
-		Link to GitHub repository: (TODO) <a href="https://cs184.eecs.berkeley.edu/sp25">cs184.eecs.berkeley.edu/sp25</a>
-		
-		<figure>
-			<img src="cornell.png" alt="Cornell Boxes with Bunnies" style="width:70%"/>
-			<figcaption>You can add images with captions!</figcaption>
-		</figure>
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
 
-		<!--
-		We've already added one heading per part, to make your write-up as navigable when grading. Please fit your write-up within these sections!
-		-->
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
 
-		<h2>Overview</h2>
-		Give a high-level overview of what you implemented in this homework. Think about what you've built as a whole. Share your thoughts on what interesting things you've learned from completing the homework.
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
 
-		<h2>Part 1: Ray Generation and Scene Intersection</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
 
-		<p>Here is an example 2x2 gridlike structure using an HTML table. Each <b>tr</b> is a row and each <b>td</b> is a column in that row. You might find this useful for framing and showing your result images in an organized fashion.</p>
-		<div style="display: flex; flex-direction: column; align-items: center;">
-			<table style="width: 100%; text-align: center; border-collapse: collapse;">
-			  <tr>
-				<td style="text-align: center;">
-				  <img src="cornell.png" width="400px"/>
-				  <figcaption>Caption goes here.</figcaption>
-				</td>
-				<td style="text-align: center;">
-				  <img src="cornell.png" width="400px"/>
-				  <figcaption>Caption goes here.</figcaption>
-				</td>
-			  </tr>
-			  <tr>
-				<td style="text-align: center;">
-				  <img src="cornell.png" width="400px"/>
-				  <figcaption>Caption goes here.</figcaption>
-				</td>
-				<td style="text-align: center;">
-				  <img src="cornell.png" width="400px"/>
-				  <figcaption>Caption goes here.</figcaption>
-				</td>
-			  </tr>
-			</table>
-		</div>
-		
-		<h2>Part 2: Bounding Volume Hierarchy</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
 
-		<h2>Part 3: Direct Illumination</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
 
-		<h2>Part 4: Global Illumination</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
 
-		<h2>Part 5: Adaptive Sampling</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
 
-		<h2>(Optional) Part 6: Extra Credit Opportunities</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		
-		<h2>Additional Notes (please remove)</h2>
-		<ul>
-			<li>You can also add code if you'd like as so: <code>code code code</code></li>
-			<li>If you'd like to add math equations, 
-				<ul>
-					<li>You can write inline equations like so: \( a^2 + b^2 = c^2 \)</li>
-					<li>You can write display equations like so: \[ a^2 + b^2 = c^2 \]</li>
-				</ul>
-			</li>
-		</ul>
-		</div>
-	</body>
-</html>
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1baab2cd-cd5c-8060-a486-d6c0850f3bb5" class="page sans"><header><h1 class="page-title">CS 284A HW3 Report</h1><p class="page-description"></p></header><div class="page-body"><p id="1baab2cd-cd5c-81da-80c6-fc771d70e75c" class="">Zihan Liao, Junming Chen</p><p id="1baab2cd-cd5c-81a0-a14f-e5b337add24c" class="">Webpage: <a href="https://cal-cs184-student.github.io/hw-webpages-zh-jm/">https://cal-cs184-student.github.io/hw-webpages-zh-jm/</a></p><p id="1baab2cd-cd5c-8187-bd3a-c57bc7b5a861" class="">GitHub: <a href="https://github.com/cal-cs184-student/sp25-hw3-sustech-hw3">https://github.com/cal-cs184-student/sp25-hw3-sustech-hw3</a></p><h1 id="1baab2cd-cd5c-81b6-9fb9-e1bccb81e5ac" class="">Overview</h1><p id="1baab2cd-cd5c-81cf-bcd7-f97f4dc7eaf4" class="">In homework 3, we successfully implemented a PBR with pathtracing. We first of all set up the ray-scene intersection and accelerate it with BVH. Then we made many effort to implement the global illunimation, this part take us lots of time for debugging. Based on these, adaptive sampling is also applied to further improve the quality and efficiency for global illumination. Eventually we gained lots of fun and a great sense of achievement.</p><h1 id="1baab2cd-cd5c-817f-900a-f4aa1930bde7" class="">Part1: Ray Generation and Scene Intersection</h1><p id="1baab2cd-cd5c-81d3-b5f9-f3040d6d12a7" class="">The first step to build a path tracer is cast the Rays and intersect with the scene. </p><p id="1baab2cd-cd5c-80a0-9d29-febd4455b09f" class="">For the Ray Generation, in <code>Camear::generate_ray()</code> we first creates a ray originating form the camera’s position and passing through the sampling points on the image plane. First of all, we need to get the sensor plane coordinates in the range [-1, 1] by <code>sensorX = tan(hFovRad / 2) * (2 * x - 1)</code> and <code>sensorY = tan(vFovRad / 2) * (2 * y - 1)</code>. For the pinhole camera model we used, the sensor plane is assumed to have a distance 1. Then we define the ray’s origin points out to the camera as  <code>Vector3D origin = Vector3D(sensorX, sensorY, -1)</code> and transform the ray’s origin and direction to world coordinates and return it as a <code>Ray</code> object.</p><p id="1baab2cd-cd5c-8035-bc0b-f7379af969a7" class="">For the Primitive Intersection, we here only consider the triangle and sphere. For sphere, the <code>Sphere::intersect</code> solves the quadratic equation resulting from the ray-sphere intersection. If intersections exist, it will find out the closest intersection point within the ray&#x27;s <code>min_t</code> and <code>max_t</code> range, and updates the <code>Intersection</code> struct with the intersection distance (<code>t</code>) and the normal at the intersection point, and the BSDF of the sphere. </p><p id="1baab2cd-cd5c-803c-a4cb-e457035fd6f9" class="">For <strong>triangle intersection, </strong>we need to calculate the cross product of the ray direction and the edge vector, to determine the barycentric cooridnates of the intersection point. And we need also to check if the ray is parallel to the triangle. Once get the intersection barycentric corrdinate, we can calculate the intersection distance and check if it’s in the valid range of the ray. If it valid for all these conditions, we will update the Ray object’s intersection information, including the pointer to the triagnle, distance, normal, and BSDF of the triangle. The triangle intersection code is as below:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1baab2cd-cd5c-8124-921e-fe5fe7948236" class="code"><code class="language-C++" style="white-space:pre-wrap;word-break:break-all">bool Triangle::intersect(const Ray&amp; r, Intersection* isect) const {
+  Vector3D e1 = p2 - p1;
+  Vector3D e2 = p3 - p1;
+  Vector3D s1 = cross(r.d, e2);
+  double det = dot(e1, s1);
+
+  if (det &gt; -1e-6 &amp;&amp; det &lt; 1e-6) {
+    return false; // Ray is parallel to the triangle
+  }
+
+  double inv_det = 1.0 / det;
+  Vector3D s = r.o - p1;
+  double b1 = dot(s, s1) * inv_det;
+  if (b1 &lt; 0.0 || b1 &gt; 1.0) return false;
+
+  Vector3D s2 = cross(s, e1);
+  double b2 = dot(r.d, s2) * inv_det;
+  if (b2 &lt; 0.0 || (b1 + b2) &gt; 1.0) return false;
+
+  double t = dot(e2, s2) * inv_det;
+  if (t &lt; r.min_t || t &gt; r.max_t) return false;
+
+  r.max_t = min(t, r.max_t);
+
+  if (isect) {
+    isect-&gt;t = t;
+    isect-&gt;primitive = this;
+    isect-&gt;n = (1 - b1 - b2) * n1 + b1 * n2 + b2 * n3; // Interpolated normal
+    isect-&gt;bsdf = get_bsdf();
+  }
+
+  return true;
+}</code></pre><p id="1baab2cd-cd5c-8149-9708-ffb4170f0c63" class="">
+</p><p id="1baab2cd-cd5c-8162-ad9c-f533445da76a" class="">Here is the <strong>result</strong> showing the normal shading:</p><div id="1baab2cd-cd5c-8032-a8f1-dc1d0de81bd8" class="column-list"><div id="1baab2cd-cd5c-80d1-81be-ecc3e50665c3" style="width:50%" class="column"><figure id="1baab2cd-cd5c-80ba-893c-d2a921fda870" class="image"><a href="sphere.png"><img style="width:332px" src="sphere.png"/></a><figcaption>Sphere</figcaption></figure></div><div id="1baab2cd-cd5c-8000-9b3e-f24f89af9825" style="width:50%" class="column"><figure id="1baab2cd-cd5c-8075-b059-ccad02f16dd5" class="image"><a href="vnis.png"><img style="width:332px" src="vnis.png"/></a><figcaption><em>CBlucy</em></figcaption></figure></div></div><h1 id="1baab2cd-cd5c-816b-a7d8-c8093f4c140c" class="">Part2: <strong>Bounding Volume Hierarchy</strong></h1><p id="1baab2cd-cd5c-81fc-87b5-e8e7ea6e3608" class="">To accelerate the ray objects intersection, we build up BVH in this part using the Surface Area Heuristic. First of all, we need to pre calculate the bounding box that encloses all the primitives, and set it as the root. After that, we need to split the axis follow the max extent rules, that choose the longest axis of the bounding box to split:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1baab2cd-cd5c-819c-a213-f11e86c21eb7" class="code"><code class="language-C++">Vector3D extent = bbox.extent;
+int split_axis = (extent.x &gt; extent.y &amp;&amp; extent.x &gt; extent.z) ? 0 : (extent.y &gt; extent.z) ? 1 : 2;</code></pre><p id="1baab2cd-cd5c-808a-b70e-e31a88d3dcb6" class="">Then, we will sort the primitives along the splitting axis based on their center points, so that we can do the Surface Area Heuristic. </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1baab2cd-cd5c-8040-ab49-efd2b66871c1" class="code"><code class="language-C++">std::sort(start, end, [split_axis](Primitive* a, Primitive* b) {
+  return a-&gt;get_bbox().centroid()[split_axis] &lt; b-&gt;get_bbox().centroid()[split_axis];
+});</code></pre><p id="1baab2cd-cd5c-8071-8286-d514fba1720f" class="">Based on the sorted split position, we will calculate the cost function to optimze the partition. We assume that the triangle and sphere have the same intersection cost. Then we will choose the minumum cost points to be the best split position. We will store the best cost and will use and update it when looping.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1baab2cd-cd5c-80ab-92c5-dd4d922493e2" class="code"><code class="language-C++">double best_cost = std::numeric_limits&lt;double&gt;::infinity();
+auto best_split = start + num_primitives / 2;
+
+std::vector&lt;BBox&gt; left_bbox(num_primitives), right_bbox(num_primitives);
+BBox left_accum, right_accum;
+for (size_t i = 0; i &lt; num_primitives; ++i) {
+  left_accum.expand((*(start + i))-&gt;get_bbox());
+  left_bbox[i] = left_accum;
+}
+
+for (size_t i = num_primitives; i &gt; 0; --i) {
+  right_accum.expand((*(start + i - 1))-&gt;get_bbox());
+  right_bbox[i - 1] = right_accum;
+}
+
+// Evaluate SAH cost at each possible split point
+for (size_t i = 1; i &lt; num_primitives; ++i) {
+  double left_area = left_bbox[i - 1].surface_area();
+  double right_area = right_bbox[i].surface_area();
+  double cost = left_area * i + right_area * (num_primitives - i);
+
+  if (cost &lt; best_cost) {
+    best_cost = cost;
+    best_split = start + i;
+  }
+}</code></pre><p id="1baab2cd-cd5c-80d7-9ffd-fe396f5d83b2" class="">In the end, we need to recursive build the BVH to the left node and right node recursively.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1baab2cd-cd5c-8003-9106-eada169d7d56" class="code"><code class="language-C++">node-&gt;l = construct_bvh(start, best_split, max_leaf_size);
+node-&gt;r = construct_bvh(best_split, end, max_leaf_size);</code></pre><p id="1baab2cd-cd5c-8114-81c5-dd36e120e945" class=""><strong>We compare </strong>the rendering times on 3 scenes in different complex level to show our BVH’s scalablity. The experiement result is runned on Windows 10, with the thread = 8, and resolution 800 600, return the normal shading. Here we can see BVH get more than 100 times speed up, and as the complexity increase, the speed up will more obvious following the N/log(N). Here is our results and running time for each.</p><div id="1baab2cd-cd5c-800b-a0d9-e4eab91b392c" class="column-list"><div id="1baab2cd-cd5c-8084-b1b5-da0e293c64a9" style="width:33.333333333333336%" class="column"><figure id="1baab2cd-cd5c-80d8-848e-d83a79f2e317" class="image"><a href="maxplank.png"><img style="width:710px" src="maxplank.png"/></a><figcaption>maxplanck</figcaption></figure></div><div id="1baab2cd-cd5c-8097-916a-dcd68a62ace8" style="width:33.333333333333336%" class="column"><figure id="1baab2cd-cd5c-80b2-b518-f136876cf52a" class="image"><a href="CBLucy.png"><img style="width:710px" src="CBLucy.png"/></a><figcaption>CBlucy</figcaption></figure></div><div id="1baab2cd-cd5c-80c0-9749-c9c6c736f1a4" style="width:33.33333333333333%" class="column"><figure id="1baab2cd-cd5c-8041-88df-cf02aa7f57b4" class="image"><a href="cow.png"><img style="width:710px" src="cow.png"/></a><figcaption>cow</figcaption></figure></div></div><table id="1baab2cd-cd5c-80dc-ac0c-d2b4bb86ebc1" class="simple-table"><thead class="simple-table-header"><tr id="1baab2cd-cd5c-802c-bccb-e1ebd3e0c0ca"><th id="HCmB" class="simple-table-header-color simple-table-header">Running Time (in seconds)</th><th id="Sjw:" class="simple-table-header-color simple-table-header">cow</th><th id="nTvM" class="simple-table-header-color simple-table-header">maxplanck</th><th id="\|OR" class="simple-table-header-color simple-table-header">CBlucy</th></tr></thead><tbody><tr id="1baab2cd-cd5c-8008-a47a-c39285eb2126"><th id="HCmB" class="simple-table-header-color simple-table-header">With BVH</th><td id="Sjw:" class="">0.2252</td><td id="nTvM" class="">0.6178</td><td id="\|OR" class="">1.5329</td></tr><tr id="1baab2cd-cd5c-8096-abad-dab105c3635b"><th id="HCmB" class="simple-table-header-color simple-table-header">W/O BVH</th><td id="Sjw:" class="">37.1645</td><td id="nTvM" class="">387.8913</td><td id="\|OR" class="">1069.4281</td></tr><tr id="1baab2cd-cd5c-802b-b944-f03650cb2ec9"><th id="HCmB" class="simple-table-header-color simple-table-header">Speed Up</th><td id="Sjw:" class="">165 times</td><td id="nTvM" class="">628 times</td><td id="\|OR" class="">697 times</td></tr></tbody></table><h1 id="1baab2cd-cd5c-812a-be75-c294ce2df440" class="">Part3: Direct Illumination</h1><p id="1baab2cd-cd5c-8165-9a35-d953624e1550" class="">In this part we implement both the uniform hemisphere sampling based on Diffuse BSDF and lighting importance sampling. </p><p id="1baab2cd-cd5c-80da-aca9-c823230d79a7" class="">For the <strong>Unifor Hemisphere Sampling, </strong>we need first of generate random directions uniformly across the hemisphere to find the lighting source. Once a ray hit the primitive, we will calculate the outgoing direction in the local coordinate. The PDF for hemisphere sampling is 1/(2π) uniformly.  We will also test the shadow ray, to check if there is any intersection with any objects, and will skip that sample If no intersection found. After all, we will get the emission from the intersected object and calculate BSDF, devide by PDF, accumulate and then get the average estimation for Monte Carlo Integration.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1baab2cd-cd5c-8138-b4d8-eddeb2f581b3" class="code"><code class="language-C++">Vector3D PathTracer::estimate_direct_lighting_hemisphere(const Ray &amp;r,
+                                                const Intersection &amp;isect) {
+  // Create coordinate system at intersection point
+  Matrix3x3 o2w;
+  make_coord_space(o2w, isect.n);
+  Matrix3x3 w2o = o2w.T();
+
+  // Get hit point and outgoing direction in local coordinates
+  const Vector3D hit_p = r.o + r.d * isect.t;
+  const Vector3D w_out = w2o * (-r.d);
+
+  int num_samples = scene-&gt;lights.size() * ns_area_light;
+  Vector3D L_out(0.0);
+
+  for (int i = 0; i &lt; num_samples; i++) {
+    // Sample a direction uniformly from the hemisphere
+    Vector3D w_in = hemisphereSampler-&gt;get_sample();
+    double pdf = 1.0 / (2.0 * PI); // PDF for uniform hemisphere sampling
+    
+    // Convert direction to world space
+    Vector3D w_in_world = o2w * w_in;
+    
+    // Cast shadow ray
+    Ray shadow_ray(hit_p, w_in_world);
+    shadow_ray.min_t = EPS_F;
+    Intersection light_isect;
+    
+    // Check for intersection
+    if (!bvh-&gt;intersect(shadow_ray, &amp;light_isect)) continue;
+    
+    // Get emission from intersected object
+    Vector3D L_i = light_isect.bsdf-&gt;get_emission();
+    L_out += isect.bsdf-&gt;f(w_out, w_in) * L_i * abs_cos_theta(w_in) / pdf;
+  }
+  
+  return L_out / num_samples;
+}</code></pre><p id="1baab2cd-cd5c-80fe-bf0d-fde34992d8f8" class="">For the <strong>Lighting Importance Sampling, </strong>instead of sampling from random directions, we direct sample based on the distribution of the lighting source. For point lights, we will only sample once, but for area lights, we will sample across it’s surface multiple times with <code>L_i = light-&gt;sample_L(hit_p, &amp;wiw, &amp;dist_to_light, &amp;pdf)</code> . However, the incident light may be below the surface, so we also need to check on the indicident direction. For the Monte Carlo Integration here, we need to estimate on the area lighting’s surface.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1baab2cd-cd5c-80e1-8423-e3ce96effc71" class="code"><code class="language-C++">Vector3D PathTracer::estimate_direct_lighting_importance(const Ray &amp;r,
+                                                const Intersection &amp;isect) {
+  // Create coordinate system at intersection point
+  Matrix3x3 o2w;
+  make_coord_space(o2w, isect.n);
+  Matrix3x3 w2o = o2w.T();
+
+  // Get hit point and outgoing direction in local coordinates
+  const Vector3D hit_p = r.o + r.d * isect.t;
+  const Vector3D w_out = w2o * (-r.d);
+  Vector3D L_out(0.0);
+
+  for (const auto&amp; light : scene-&gt;lights) {
+    int num_samples = (light-&gt;is_delta_light()) ? 1 : ns_area_light;
+
+    for (int i = 0; i &lt; num_samples; i++) {
+      Vector3D wiw;
+      double dist_to_light, pdf;
+      // Sample light to get direction, distance and PDF
+      Vector3D L_i = light-&gt;sample_L(hit_p, &amp;wiw, &amp;dist_to_light, &amp;pdf);
+
+      if (pdf &lt; EPS_F) continue;
+
+      Vector3D w_in = w2o * wiw; // Convert to local space
+      if (w_in.z &lt; 0) continue; // Skip directions below the surface
+      
+      // Cast shadow ray
+      Ray shadow_ray(hit_p, wiw);
+      shadow_ray.min_t = EPS_F;
+      shadow_ray.max_t = std::max(dist_to_light - EPS_F, shadow_ray.min_t);
+      
+      // Check for intersection (shadows)
+      if (bvh-&gt;has_intersection(shadow_ray)) continue;
+      
+      // Compute contribution
+      L_out += isect.bsdf-&gt;f(w_out, w_in) * L_i * abs_cos_theta(w_in) / pdf;
+    }
+
+    if (!light-&gt;is_delta_light()) L_out /= num_samples;
+  }
+
+  return L_out;
+}</code></pre><p id="1baab2cd-cd5c-8061-82af-feeed059337c" class="">
+</p><p id="1baab2cd-cd5c-81ac-9418-e4b4e0d68c22" class="">Here is our comparison on the bunny scene between the Uniform Sampling and Lighting Sampling. <strong>Analysis the results</strong> between the two sampling implementations, we find that even though the uniform hemisphere sampling is mathmatically correct for the Diffuse BSDF, it’s not as efficient as lighting sampling, since most rays cast from it will not hit the light souces. And from the results, we can tell that the uniform sampling alwyas have more noise, which means its estimator have higher variance than the lighting sampling. For the lighting sampling, it converge faster, but might hard for the complex light source geometry, and will also suffers if the scene lighting condition is quiet dense.</p><div id="1baab2cd-cd5c-8058-973d-f081389b7399" class="column-list"><div id="1baab2cd-cd5c-8078-8d8e-f4e522c88407" style="width:50%" class="column"><figure id="1baab2cd-cd5c-807c-a740-fb261c483e49" class="image"><a href="CBbunny_H_64_32.png"><img style="width:332px" src="CBbunny_H_64_32.png"/></a><figcaption>Uniform hemishpere sampling</figcaption></figure></div><div id="1baab2cd-cd5c-80b3-b0a1-f6589fd7e75f" style="width:50%" class="column"><figure id="1baab2cd-cd5c-804c-914d-ec1bf567bf6b" class="image"><a href="bunny_64_32.png"><img style="width:332px" src="bunny_64_32.png"/></a><figcaption>Lighting sampling</figcaption></figure></div></div><p id="1baab2cd-cd5c-80dd-a3ff-d2d0b47e00ed" class="">We also compare the nose levels in soft shadows, using the light sampling, with 1, 4, 16, and 64 light rays and only 1 sample per pixel using light sampling. We can see that as the nums of light rays increase, the soft shadow is cleaner, and also centered, showing that the estimation’s variance is reduced with more sampling on area light.</p><div id="1baab2cd-cd5c-80a1-9b6a-d1d5f98f0ec3" class="column-list"><div id="1baab2cd-cd5c-80d9-8d62-e23db83d9175" style="width:50%" class="column"><figure id="1baab2cd-cd5c-8042-b79d-dcc5b973d53c" class="image"><a href="bunny_1_64_1.png"><img style="width:332px" src="bunny_1_64_1.png"/></a><figcaption>light rays = 1</figcaption></figure></div><div id="1baab2cd-cd5c-80f1-afc8-f6725ea006cc" style="width:50%" class="column"><figure id="1baab2cd-cd5c-8007-97e7-e0ade842f683" class="image"><a href="bunny_1_64_4.png"><img style="width:332px" src="bunny_1_64_4.png"/></a><figcaption>light rays = 4</figcaption></figure></div></div><div id="1baab2cd-cd5c-8045-a47d-c8fce1228202" class="column-list"><div id="1baab2cd-cd5c-80a3-984b-ddf760dfe43c" style="width:50%" class="column"><figure id="1baab2cd-cd5c-8026-a77c-d4658029b74d" class="image"><a href="bunny_1_64_16.png"><img style="width:332px" src="bunny_1_64_16.png"/></a><figcaption>light rays = 16</figcaption></figure></div><div id="1baab2cd-cd5c-80b0-8975-c0994d3b5d91" style="width:50%" class="column"><figure id="1baab2cd-cd5c-80d4-b929-d5a57b0c850f" class="image"><a href="bunny_1_64_64.png"><img style="width:332px" src="bunny_1_64_64.png"/></a><figcaption>light rays = 64</figcaption></figure></div></div><h1 id="1baab2cd-cd5c-81d8-971a-cac1a145c0da" class=""><strong>Part 4: Global Illumination</strong></h1><p id="1baab2cd-cd5c-812c-a65f-d88d11a7ab8b" class="">Besides direct lighting from the light source, the light will also bounce infinitely in the scene. In this part we will include the indirect lighting to achieve global illumination. Same as the direction lighting, we will first get the hit points of the ray, and initialize <code>L_out</code> to accumulate the radiance. For one ray, we directly use the direct illumination by calling <code>one_bounce_radiance</code> . Instead of uniform sampling, we here sample the BSDF to get a incoming direction. After that, we can now create the new ray for the next bounce, that origin from the hit points, and point out in the sampled incoming light direction. To avoid infinite bounces and fast converge, we use the Russian Roulette with 0.35 probablity for terminate this ray. Based the rendering equation, we will recursively call the <code>at_least_one_bounce_radiance</code> on the following new incoming ray.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1baab2cd-cd5c-8002-be7e-eb3268520446" class="code"><code class="language-C++">Vector3D PathTracer::at_least_one_bounce_radiance(const Ray &amp;r,
+                                                  const Intersection &amp;isect) {
+	if (max_ray_depth == 0) return Vector3D(0.0);
+
+  Matrix3x3 o2w;
+  make_coord_space(o2w, isect.n);
+  Matrix3x3 w2o = o2w.T();
+
+  Vector3D hit_p = r.o + r.d * isect.t;
+  Vector3D w_out = w2o * (-r.d);
+
+  Vector3D L_out(0, 0, 0);
+
+  Vector3D direct_light = one_bounce_radiance(r, isect);
+
+  if (r.depth &gt;= max_ray_depth - 1) {
+    return direct_light; // If only last bounce is needed, return at max depth
+  }
+
+  if (isAccumBounces) {
+    L_out += direct_light; // Accumulate direct lighting
+  }
+
+  Vector3D w_in;
+  double pdf;
+  Vector3D f = isect.bsdf-&gt;sample_f(w_out, &amp;w_in, &amp;pdf);
+
+  if (pdf &lt; EPS_F || f.norm() &lt; EPS_F) return L_out; // Avoid division by zero
+
+  Vector3D w_in_world = o2w * w_in;
+  Ray new_ray(hit_p, w_in_world);
+	new_ray.min_t = EPS_F;
+  new_ray.depth = r.depth + 1;
+
+  double rr_prob = 0.35;
+  if (new_ray.depth &gt;= max_ray_depth || coin_flip(rr_prob)) return L_out;
+
+  Intersection new_isect;
+  if (bvh-&gt;intersect(new_ray, &amp;new_isect)) {
+    Vector3D indirect = at_least_one_bounce_radiance(new_ray, new_isect);
+    L_out += (f * indirect * abs_cos_theta(w_in)) / (pdf * (1 - rr_prob)); // Accumulate all bounces
+  }
+
+  return L_out;
+}</code></pre><p id="1baab2cd-cd5c-8174-9b98-e6d65f697b35" class="">Here is some global illumination <strong>examples with 1024 samples per pixel, lighting samples = 16, max ray depth=5. </strong>We also show the Sphere scene for only direct illumination and only indirection illumination.</p><div id="1bbab2cd-cd5c-8067-9338-e45afbf32882" class="column-list"><div id="1bbab2cd-cd5c-8049-bbb9-ece4956309a6" style="width:50%" class="column"><figure id="1baab2cd-cd5c-8089-a074-f5c3eb63fc3c" class="image"><a href="bunny.png"><img style="width:332px" src="bunny.png"/></a><figcaption>Bunny</figcaption></figure><figure id="1bbab2cd-cd5c-807d-ab56-c94fc6d83425" class="image"><a href="Sphere_dir_1024.png"><img style="width:332px" src="Sphere_dir_1024.png"/></a><figcaption>Sphere, Only direct illumination</figcaption></figure></div><div id="1bbab2cd-cd5c-8007-86e3-e6a81f52896a" style="width:50%" class="column"><figure id="1bbab2cd-cd5c-80de-a73e-e1aa252cba4a" class="image"><a href="spheres.png"><img style="width:332px" src="spheres.png"/></a><figcaption>Sphere</figcaption></figure><figure id="1bbab2cd-cd5c-8033-9f2e-f64ba62adc7d" class="image"><a href="Sphere_dir_1024%201.png"><img style="width:332px" src="Sphere_dir_1024%201.png"/></a><figcaption>Sphere, Only indirect illumination</figcaption></figure></div></div><p id="1bbab2cd-cd5c-8018-b977-da383e154b64" class="">We here output the each ray depth’s <strong>kth bounce</strong> of light. For the 2nd and 3rd bouce, compared to rasterization, they mainly contributed to the reflection between the objects. In the following results, we can see that for the 2nd bounce, the bunny get the light from the ground, and also cast the shadow to the left and right walls. And in the 3rd bounce, we can tell that the ground also receive the light reflected by the bunny.</p><div id="1bbab2cd-cd5c-8044-adba-fe6fedfdb88b" class="column-list"><div id="1bbab2cd-cd5c-8053-abcf-c91d3c9eddf3" style="width:50%" class="column"><figure id="1bbab2cd-cd5c-807b-94e2-fa1aef6be4e0" class="image"><a href="Bunny_m_0_t.png"><img style="width:332px" src="Bunny_m_0_t.png"/></a><figcaption>Bunny, 0th bounce</figcaption></figure><figure id="1bbab2cd-cd5c-80d1-b584-f1104e698737" class="image"><a href="Bunny_m_2_t.png"><img style="width:480px" src="Bunny_m_2_t.png"/></a><figcaption>Bunny, 2nd bounce</figcaption></figure><figure id="1bbab2cd-cd5c-8083-8125-c85544b7817f" class="image"><a href="Bunny_m_4_t.png"><img style="width:480px" src="Bunny_m_4_t.png"/></a><figcaption>Bunny, 4th bounce</figcaption></figure><p id="1bbab2cd-cd5c-80c4-ad19-c5483b37db3a" class="">
+</p></div><div id="1bbab2cd-cd5c-809b-9956-dce19f957a54" style="width:50%" class="column"><figure id="1bbab2cd-cd5c-8000-a106-e480c76fece4" class="image"><a href="Bunny_m_1_t.png"><img style="width:480px" src="Bunny_m_1_t.png"/></a><figcaption>Bunny, 1st bounce</figcaption></figure><figure id="1bbab2cd-cd5c-80a4-b5da-d58589a5009a" class="image"><a href="Bunny_m_3_t.png"><img style="width:480px" src="Bunny_m_3_t.png"/></a><figcaption>Bunny, 3rd bounce</figcaption></figure><figure id="1bbab2cd-cd5c-8096-bdca-dd590b7fc413" class="image"><a href="Bunny_m_5_t.png"><img style="width:480px" src="Bunny_m_5_t.png"/></a><figcaption>Bunny, 5th bounce</figcaption></figure><p id="1bbab2cd-cd5c-8059-87db-d08c90c5f293" class="">
+</p></div></div><p id="1baab2cd-cd5c-8140-992a-fa663c47ac00" class="">We test the Bunny scene with <strong>Russian Roulette</strong> with different max ray depth showing below, we can tell that after max ray depth=4, the results have already converge, and there is no obvious different even though the depth increase to 1024:</p><div id="1bbab2cd-cd5c-80d1-893e-c592389b7a4e" class="column-list"><div id="1bbab2cd-cd5c-80db-9513-e4582fd15c8e" style="width:50%" class="column"><figure id="1bbab2cd-cd5c-80cd-bf26-ced0a7325506" class="image"><a href="Bunny_RR_m_0.png"><img style="width:332px" src="Bunny_RR_m_0.png"/></a><figcaption>Bunny, Russian Roulette, max ray depth=0</figcaption></figure></div><div id="1bbab2cd-cd5c-80d1-98e7-e7047942222c" style="width:50%" class="column"><figure id="1bbab2cd-cd5c-8042-a0a6-c41a3845e455" class="image"><a href="Bunny_RR_m_1.png"><img style="width:332px" src="Bunny_RR_m_1.png"/></a><figcaption>Bunny, Russian Roulette, max ray depth=1</figcaption></figure></div></div><div id="1bbab2cd-cd5c-80cc-9c58-f1c34de82522" class="column-list"><div id="1bbab2cd-cd5c-8054-833b-f965f2c8130e" style="width:50%" class="column"><figure id="1bbab2cd-cd5c-80a2-9230-de89c8455e7f" class="image"><a href="Bunny_RR_m_2.png"><img style="width:332px" src="Bunny_RR_m_2.png"/></a><figcaption>Bunny, Russian Roulette, max ray depth=2</figcaption></figure></div><div id="1bbab2cd-cd5c-8068-b6f3-d7add9647fce" style="width:50%" class="column"><figure id="1bbab2cd-cd5c-8024-8dde-ef8c3bc63321" class="image"><a href="Bunny_RR_m_4.png"><img style="width:332px" src="Bunny_RR_m_4.png"/></a><figcaption>Bunny, Russian Roulette, max ray depth=4</figcaption></figure></div></div><div id="1bbab2cd-cd5c-801b-9a84-c7ced91356f0" class="column-list"><div id="1bbab2cd-cd5c-80c7-984b-d8a16b0c2364" style="width:50%" class="column"><figure id="1bbab2cd-cd5c-8063-ba08-f3ce5196fb94" class="image"><a href="Bunny_RR_m_8.png"><img style="width:332px" src="Bunny_RR_m_8.png"/></a><figcaption>Bunny, Russian Roulette, max ray depth=8</figcaption></figure></div><div id="1bbab2cd-cd5c-80d7-b408-dd0c3dae492a" style="width:50%" class="column"><figure id="1bbab2cd-cd5c-80d1-96b9-d751cfcfec5e" class="image"><a href="Bunny_RR_m_16.png"><img style="width:332px" src="Bunny_RR_m_16.png"/></a><figcaption>Bunny, Russian Roulette, max ray depth=16</figcaption></figure></div></div><div id="1bbab2cd-cd5c-8091-b4bb-d42df61f1b8b" class="column-list"><div id="1bbab2cd-cd5c-8032-bd77-faf680fe7a2c" style="width:50%" class="column"><figure id="1bbab2cd-cd5c-80b6-93a2-eaa5b01736e9" class="image"><a href="Bunny_RR_m_64.png"><img style="width:332px" src="Bunny_RR_m_64.png"/></a><figcaption>Bunny, Russian Roulette, max ray depth=64</figcaption></figure></div><div id="1bbab2cd-cd5c-80e0-81f8-d95297232511" style="width:50%" class="column"><figure id="1bbab2cd-cd5c-8083-971b-c01f505e06fb" class="image"><a href="Bunny_RR_m_1024.png"><img style="width:332px" src="Bunny_RR_m_1024.png"/></a><figcaption>Bunny, Russian Roulette, max ray depth=1024</figcaption></figure></div></div><p id="1bbab2cd-cd5c-80c9-a409-e3ad9d75f2fd" class="">We <strong>also test the different sample-per-pixel rates</strong> with different 4 light rays showing below. We can find that as the sample-per-pixel increase, the noise is reduced.</p><div id="1bbab2cd-cd5c-80f2-a034-d1e33bd91ca7" class="column-list"><div id="1bbab2cd-cd5c-805d-98e9-d587161dfbb3" style="width:50%" class="column"><figure id="1bbab2cd-cd5c-8003-a719-feeb52912a7f" class="image"><a href="Bunny_s_1.png"><img style="width:332px" src="Bunny_s_1.png"/></a><figcaption>Bunny, light rays=4, sample per pixel = 1</figcaption></figure></div><div id="1bbab2cd-cd5c-8005-8165-d7e0b65929e4" style="width:50%" class="column"><figure id="1bbab2cd-cd5c-80c9-81a4-dcd4fdc94c2d" class="image"><a href="Bunny_s_2.png"><img style="width:332px" src="Bunny_s_2.png"/></a><figcaption>Bunny, light rays=4, sample per pixel = 2</figcaption></figure></div></div><div id="1bbab2cd-cd5c-8049-99fe-e71a98e84d58" class="column-list"><div id="1bbab2cd-cd5c-80b7-84c9-fc4ece84867b" style="width:50%" class="column"><figure id="1bbab2cd-cd5c-80bc-9cb6-d8a6fe2ab1aa" class="image"><a href="Bunny_s_4.png"><img style="width:332px" src="Bunny_s_4.png"/></a><figcaption>Bunny, light rays=4, sample per pixel = 4</figcaption></figure><figure id="1bbab2cd-cd5c-80c5-96d0-ff22cac9b0e9" class="image"><a href="Bunny_s_16.png"><img style="width:332px" src="Bunny_s_16.png"/></a><figcaption>Bunny, light rays=4, sample per pixel = 16</figcaption></figure></div><div id="1bbab2cd-cd5c-802a-b2c4-d59ee35cc23b" style="width:50%" class="column"><figure id="1bbab2cd-cd5c-8018-adf2-f63caa316805" class="image"><a href="Bunny_s_8.png"><img style="width:332px" src="Bunny_s_8.png"/></a><figcaption>Bunny, light rays=4, sample per pixel = 8</figcaption></figure><figure id="1bbab2cd-cd5c-80b4-a995-ff567b830dff" class="image"><a href="Bunny_s_64.png"><img style="width:332px" src="Bunny_s_64.png"/></a><figcaption>Bunny, light rays=4, sample per pixel = 64</figcaption></figure></div></div><figure id="1bbab2cd-cd5c-806f-bdb6-e6f683438cef" class="image"><a href="Bunny_s_1024.png"><img style="width:480px" src="Bunny_s_1024.png"/></a><figcaption>Bunny, light rays=4, sample per pixel = 1024</figcaption></figure><h1 id="1baab2cd-cd5c-81be-96c7-c7888661e7e4" class=""><strong>Part 5: Adaptive Sampling</strong></h1><p id="1baab2cd-cd5c-811a-9726-d50eabe7a715" class="">From the previous parts, we can see that the sample rate per pixel is important to get noiseless results. But it will cost too much time, when uniformly sample the pixels with the same sample rate. In this part, we use the dapative sampling to take more samples in noisy areas and fewer samples in converged area.</p><p id="1bbab2cd-cd5c-802b-b52a-d0b8a41e8569" class="">For each pixel, we first of all need to records it’s samples color’s distribution. We store the mean and variance of each pixels samples’ color to decide whether it’s already converged. We will compute the global illumination radiance of the sampled ray, and converts to a scalar luminance and update the mean and variance. We check if the luminance now under the inside the confidence interval ( at 95% confidence level) following the rules <code>I = 1.96 * stddev / sqrt(num_samples)</code> . And if it’s already converged, we will return the average color and terminate sampling more rays from this pixels. Here is our code:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1baab2cd-cd5c-81e0-8b99-f4dc2e1d4161" class="code"><code class="language-C++">void PathTracer::raytrace_pixel(size_t x, size_t y) {
+  int num_samples = 0;        // Current number of samples taken
+  Vector2D origin = Vector2D(x, y); // Bottom-left corner of the pixel
+
+  Vector3D sampleColor(0, 0, 0);  // Accumulated radiance
+  double s1 = 0, s2 = 0;          // Accumulators for mean and variance
+
+  for (int i = 0; i &lt; ns_aa; i++) {
+    Vector2D sample = gridSampler-&gt;get_sample();
+    Vector2D p = origin + (sample + Vector2D(0.5, 0.5));
+    Ray r = camera-&gt;generate_ray(p.x / sampleBuffer.w, p.y / sampleBuffer.h);
+    Vector3D radiance = est_radiance_global_illumination(r);
+
+    double illum = radiance.illum(); // Convert to scalar luminance
+    s1 += illum;
+    s2 += illum * illum;
+
+    sampleColor += radiance;
+    num_samples++;
+
+    // Perform adaptive sampling check every samplesPerBatch
+    if (num_samples % samplesPerBatch == 0) {
+      double mean = s1 / num_samples;
+      double variance = (s2 - (s1 * s1) / num_samples) / (num_samples - 1);
+      double stddev = sqrt(variance);
+			double I = 1.96 * stddev / sqrt(num_samples);
+
+      // Check convergence condition
+      if (I &lt;= maxTolerance * mean) {
+        break; // Stop sampling if converged
+      }
+    }
+  }
+
+  sampleBuffer.update_pixel(sampleColor / num_samples, x, y);
+  sampleCountBuffer[x + y * sampleBuffer.w] = num_samples;
+}</code></pre><p id="1baab2cd-cd5c-8120-8c38-f7aa47b2a808" class="">Here is our <strong>results with 2048 samplers per pixel</strong> on two scenes. We can see from the sampling rate map, that the noised (dark) area in original image will have more samples (in red in sampling rate map).</p><div id="1bbab2cd-cd5c-802d-8e7f-d50cd1e018d3" class="column-list"><div id="1bbab2cd-cd5c-807d-b2c8-e1a946f3fc73" style="width:50%" class="column"><figure id="1bbab2cd-cd5c-8068-9a90-f4a6cd309d1d" class="image"><a href="bunny_ada.png"><img style="width:480px" src="bunny_ada.png"/></a><figcaption>Bunny, samplers per pixel = 2048</figcaption></figure><figure id="1bbab2cd-cd5c-80ff-bf11-e9e108adea07" class="image"><a href="gems_ada.png"><img style="width:332px" src="gems_ada.png"/></a><figcaption>Sphere, samplers per pixel = 2048</figcaption></figure><p id="1bbab2cd-cd5c-803b-ab9a-f45fc88d6274" class="">
+</p><p id="1bbab2cd-cd5c-801f-9b98-e5d823646df5" class="">
+</p></div><div id="1bbab2cd-cd5c-802d-86cd-ee65c1cd24e2" style="width:50%" class="column"><figure id="1bbab2cd-cd5c-8030-bc3e-f3b331263047" class="image"><a href="bunny_ada_rate.png"><img style="width:480px" src="bunny_ada_rate.png"/></a><figcaption>Bunny, Adaptive Sampling Rate map</figcaption></figure><figure id="1bbab2cd-cd5c-809b-ba39-d03d8442cf15" class="image"><a href="gems_ada_rate.png"><img style="width:332px" src="gems_ada_rate.png"/></a><figcaption>Bunny, Adaptive Sampling Rate map</figcaption></figure><p id="1bbab2cd-cd5c-8005-8f01-e69fdc086677" class="">
+</p></div></div><p id="1bbab2cd-cd5c-80be-8fcd-c05b82ce2889" class="">
+</p><p id="1baab2cd-cd5c-8186-8d84-f770fe5b28ba" class="">
+</p><p id="1baab2cd-cd5c-8164-a747-f22fd31540d1" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
